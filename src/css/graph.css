@@ -1,0 +1,215 @@
+#graph {
+    position: relative;
+    width: 740px;
+}
+
+#graph .hour {
+    position: absolute;
+    color: red;
+    /* display: none; */
+}
+#graph #h-g1 {
+    left: 10px;
+    top: 520px;
+}
+#graph #h0-g1 {
+    left: 10px;
+    top: 20px;
+}
+#graph #h1-g1 {
+    left: 10px;
+    top: 40px;
+}
+#graph #h2-g1 {
+    left: 10px;
+    top: 60px;
+}
+#graph #h3-g1 {
+    left: 10px;
+    top: 80px;
+}
+#graph #h4-g1 {
+    left: 10px;
+    top: 100px;
+}
+#graph #h5-g1 {
+    left: 10px;
+    top: 120px;
+}
+#graph #h6-g1 {
+    left: 10px;
+    top: 140px;
+}
+#graph #h7-g1 {
+    left: 10px;
+    top: 160px;
+}
+#graph #h8-g1 {
+    left: 10px;
+    top: 180px;
+}
+#graph #h9-g1 {
+    left: 10px;
+    top: 200px;
+}
+#graph #h10-g1 {
+    left: 10px;
+    top: 220px;
+}
+#graph #h11-g1 {
+    left: 10px;
+    top: 240px;
+}
+#graph #h12-g1 {
+    left: 10px;
+    top: 260px;
+}
+#graph #h13-g1 {
+    left: 10px;
+    top: 280px;
+}
+#graph #h14-g1 {
+    left: 10px;
+    top: 300px;
+}
+#graph #h15-g1 {
+    left: 10px;
+    top: 320px;
+}
+#graph #h16-g1 {
+    left: 10px;
+    top: 340px;
+}
+#graph #h17-g1 {
+    left: 10px;
+    top: 360px;
+}
+#graph #h18-g1 {
+    left: 10px;
+    top: 380px;
+}
+#graph #h19-g1 {
+    left: 10px;
+    top: 400px;
+}
+#graph #h20-g1 {
+    left: 10px;
+    top: 420px;
+}
+#graph #h21-g1 {
+    left: 10px;
+    top: 440px;
+}
+#graph #h22-g1 {
+    left: 10px;
+    top: 460px;
+}
+#graph #h23-g1 {
+    left: 10px;
+    top: 480px;
+}
+#graph #h24-g1 {
+    left: 10px;
+    top: 500px;
+}
+
+#graph #h-g2 {
+    left: 680px;
+    top: 40px;
+}
+#graph #h1-g2 {
+    left: 53.3px;
+    top: 10px;
+}
+#graph #h2-g2 {
+    left: 81.6px;
+    top: 10px;
+}
+#graph #h3-g2 {
+    left: 110px;
+    top: 10px;
+}
+#graph #h4-g2 {
+    left: 138.3px;
+    top: 10px;
+}
+#graph #h5-g2 {
+    left: 166.6px;
+    top: 10px;
+}
+#graph #h6-g2 {
+    left: 195px;
+    top: 10px;
+}
+#graph #h7-g2 {
+    left: 223.3px;
+    top: 10px;
+}
+#graph #h8-g2 {
+    left: 251.6px;
+    top: 10px;
+}
+#graph #h9-g2 {
+    left: 280px;
+    top: 10px;
+}
+#graph #h10-g2 {
+    left: 305.3px;
+    top: 10px;
+}
+#graph #h11-g2 {
+    left: 331.6px;
+    top: 10px;
+}
+#graph #h12-g2 {
+    left: 360px;
+    top: 10px;
+}
+#graph #h13-g2 {
+    left: 388.3px;
+    top: 10px;
+}
+#graph #h14-g2 {
+    left: 416.6px;
+    top: 10px;
+}
+#graph #h15-g2 {
+    left: 455px;
+    top: 10px;
+}
+#graph #h16-g2 {
+    left: 473.3px;
+    top: 10px;
+}
+#graph #h17-g2 {
+    left: 501.6px;
+    top: 10px;
+}
+#graph #h18-g2 {
+    left: 530px;
+    top: 10px;
+}
+#graph #h19-g2 {
+    left: 558.3px;
+    top: 10px;
+}
+#graph #h20-g2 {
+    left: 586.6px;
+    top: 10px;
+}
+#graph #h21-g2 {
+    left: 615px;
+    top: 10px;
+}
+#graph #h22-g2 {
+    left: 643.3px;
+    top: 10px;
+}
+#graph #h23-g2 {
+    left: 671.6px;
+    top: 10px;
+}
+#graph #h24-g2 {
+    left: 700px;
+    top: 10px;
+}
