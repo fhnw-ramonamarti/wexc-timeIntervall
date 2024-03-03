@@ -1,0 +1,112 @@
+#circle {
+    position: relative;
+}
+#circle svg {
+    transform: rotate(-90deg);
+}
+#circle .hour {
+    position: absolute;
+    color: red;
+    /* display: none; */
+}    
+
+#circle #h0-s {
+    left: 255px;
+    top: 140px;
+}
+#circle #h1-s {
+    left: 320px;
+    top: 160px;
+}
+#circle #h2-s {
+    left: 370px;
+    top: 210px;
+}
+#circle #h3-s {
+    left: 390px;
+    top: 270px;
+}
+#circle #h4-s {
+    left: 370px;
+    top: 340px;
+}
+#circle #h5-s {
+    left: 320px;
+    top: 380px;
+}
+#circle #h6-s {
+    left: 260px;
+    top: 400px;
+}
+#circle #h7-s {
+    left: 190px;
+    top: 380px;
+}
+#circle #h8-s {
+    left:150px;
+    top: 340px;
+}
+#circle #h9-s {
+    left: 120px;
+    top: 270px;
+}
+#circle #h10-s {
+    left: 140px;
+    top: 210px;
+}
+#circle #h11-s {
+    left: 190px;
+    top: 160px;
+}
+#circle #h12-s {
+    left: 250px;
+    top: 100px;
+}
+#circle #h13-s {
+    left: 370px;
+    top: 60px;
+}
+#circle #h14-s {
+    left: 460px;
+    top: 150px;
+}
+#circle #h15-s {
+    left: 490px;
+    top: 270px;
+}
+#circle #h16-s {
+    left: 460px;
+    top: 390px;
+}
+#circle #h17-s {
+    left: 370px;
+    top: 480px;
+}
+#circle #h18-s {
+    left: 250px;
+    top: 510px;
+}
+#circle #h19-s {
+    left: 130px;
+    top: 480px;
+}
+#circle #h20-s {
+    left: 40px;
+    top: 390px;
+}
+#circle #h21-s {
+    left: 10px;
+    top: 270px;
+}
+#circle #h22-s {
+    left: 40px;
+    top: 150px;
+}
+#circle #h23-s {
+    left: 130px;
+    top: 60px;
+}
+#circle #h24-s {
+    left: 250px;
+    top: 30px;
+}
