@@ -17,5 +17,7 @@ body {
     background-color: white;
     padding: 10px;
     margin: 10px;
-    display: inline-block;
+    display: block;
+    width: 540px;
+    position: relative;
 }

@@ -47,12 +47,13 @@ elem += `<path d="
 
 elem += `</svg>`;
 spiral.innerHTML = elem;
-const path = spiral.querySelector("path#timeBar");
 
+const path = spiral.querySelector("path#timeBar");
 const time = (90 * path.getTotalLength()) / 60 / 24;
-const start = ((60 * 12 + 15) * path.getTotalLength()) / 60 / 24;
+const start = ((60 * 11 + 15) * path.getTotalLength()) / 60 / 24;
 path.setAttribute("stroke-dashoffset", `-${start}`);
 path.setAttribute("stroke-dasharray", `${time},${path.getTotalLength()}`);
+
 for (let i = 0; i <= 24; i++) {
     spiral.innerHTML += `<div class="hour" id="h${i}">${i}</div>`;
 }
