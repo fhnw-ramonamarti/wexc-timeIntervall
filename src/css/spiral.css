@@ -6,107 +6,109 @@
 #spiral .hour {
     position: absolute;
     color: red;
-    background-color: white;
+    /* background-color: white; */
+    border-radius: 50%;
+    padding: 2px;
     /* display: none; */
 }
 
 #spiral #h0 {
-    left: 250px;
+    left: 275px;
     top: 265px;
 }
 #spiral #h1 {
-    left: 280px;
-    top: 310px;
+    left: 290px;
+    top: 315px;
 }
 #spiral #h2 {
-    left: 200px;
-    top: 240px;
+    left: 225px;
+    top: 245px;
 }
 #spiral #h3 {
-    left: 320px;
-    top: 190px;
+    left: 335px;
+    top: 220px;
 }
 #spiral #h4 {
     left: 350px;
-    top: 320px;
+    top: 330px;
 }
 #spiral #h5 {
-    left: 220px;
-    top: 370px;
+    left: 230px;
+    top: 365px;
 }
 #spiral #h6 {
-    left: 140px;
-    top: 260px;
+    left: 165px;
+    top: 265px;
 }
 #spiral #h7 {
-    left: 220px;
-    top: 140px;
-}
-#spiral #h8 {
-    left:360px;
+    left: 235px;
     top: 160px;
 }
+#spiral #h8 {
+    left:370px;
+    top: 175px;
+}
 #spiral #h9 {
-    left: 415px;
-    top: 290px;
+    left: 420px;
+    top: 295px;
 }
 #spiral #h10 {
-    left: 340px;
+    left: 345px;
     top: 410px;
 }
 #spiral #h11 {
-    left: 190px;
+    left: 215px;
     top: 420px;
 }
 #spiral #h12 {
-    left: 90px;
-    top: 320px;
+    left: 120px;
+    top: 335px;
 }
 #spiral #h13 {
-    left: 100px;
-    top: 180px;
+    left: 125px;
+    top: 195px;
 }
 #spiral #h14 {
-    left: 210px;
-    top: 90px;
+    left: 215px;
+    top: 105px;
 }
 #spiral #h15 {
-    left: 350px;
-    top: 90px;
+    left: 360px;
+    top: 105px;
 }
 #spiral #h16 {
     left: 450px;
-    top: 190px;
+    top: 195px;
 }
 #spiral #h17 {
-    left: 460px;
-    top: 340px;
+    left: 465px;
+    top: 335px;
 }
 #spiral #h18 {
-    left: 370px;
+    left: 390px;
     top: 450px;
 }
 #spiral #h19 {
-    left: 230px;
-    top: 490px;
+    left: 260px;
+    top: 485px;
 }
 #spiral #h20 {
-    left: 100px;
+    left: 125px;
     top: 440px;
 }
 #spiral #h21 {
-    left: 20px;
-    top: 310px;
+    left: 60px;
+    top: 325px;
 }
 #spiral #h22 {
-    left: 40px;
-    top: 170px;
+    left: 65px;
+    top: 185px;
 }
 #spiral #h23 {
-    left: 125px;
-    top: 60px;
+    left: 145px;
+    top: 75px;
 }
 #spiral #h24 {
-    left: 270px;
-    top: 20px;
+    left: 280px;
+    top: 40px;
 }
