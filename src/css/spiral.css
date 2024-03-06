@@ -11,6 +11,9 @@
     padding: 2px;
     /* display: none; */
 }
+#spiral svg {
+    position: absolute;
+}
 
 #spiral #h0 {
     left: 275px;
