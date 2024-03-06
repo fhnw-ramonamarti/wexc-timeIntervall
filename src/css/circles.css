@@ -1,0 +1,25 @@
+#circles {
+    position: relative;
+}
+#circles svg {
+    transform: rotate(-90deg);
+}
+#circles .hour {
+    position: absolute;
+    color: red;
+    /* display: none; */
+}   
+
+#circles .middle {
+    position: absolute;
+    top: 270px;
+    left: 255px;
+    color: red;
+}
+
+#circles .top {
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    color: red;
+}
