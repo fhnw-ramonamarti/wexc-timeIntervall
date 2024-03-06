@@ -94,7 +94,7 @@ spiral.innerHTML = elem;
 const path = spiral.querySelector("path#timeBar");
 const total = path.getTotalLength() - 3;
 const time = (90 * total) / 60 / 24;
-const start = ((60 * 4 + 15) * total) / 60 / 24 ;
+const start = ((60 * 11 + 15) * total) / 60 / 24 ;
 path.setAttribute("stroke-dasharray", `${time},${path.getTotalLength()}`);
 path.setAttribute("stroke-dashoffset", `-${start}`);
 const ticks = spiral.querySelector("path#timeTicks");
