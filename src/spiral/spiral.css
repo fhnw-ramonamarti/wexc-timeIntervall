@@ -1,0 +1,125 @@
+#spiralTime {
+    width: 540px;
+    aspect-ratio: 1/1;
+    position: relative;
+}
+#spiralTime .hour {
+    position: absolute;
+    color: red;
+    /* background-color: white; */
+    border-radius: 50%;
+    padding: 2px;
+    /* display: none; */
+}
+#spiralTime svg {
+    position: absolute;
+}
+#spiralTime .segment {
+    z-index: 99;
+    /* transform-origin: center; */
+    /* scale: 0.9; */
+}
+.lll {
+    transform: translate(0%,-100%) scaleY(-1);
+}
+
+#spiralTime #h0 {
+    left: 275px;
+    top: 265px;
+}
+#spiralTime #h1 {
+    left: 290px;
+    top: 315px;
+}
+#spiralTime #h2 {
+    left: 225px;
+    top: 245px;
+}
+#spiralTime #h3 {
+    left: 335px;
+    top: 220px;
+}
+#spiralTime #h4 {
+    left: 350px;
+    top: 330px;
+}
+#spiralTime #h5 {
+    left: 230px;
+    top: 365px;
+}
+#spiralTime #h6 {
+    left: 165px;
+    top: 265px;
+}
+#spiralTime #h7 {
+    left: 235px;
+    top: 160px;
+}
+#spiralTime #h8 {
+    left: 370px;
+    top: 175px;
+}
+#spiralTime #h9 {
+    left: 420px;
+    top: 295px;
+}
+#spiralTime #h10 {
+    left: 345px;
+    top: 410px;
+}
+#spiralTime #h11 {
+    left: 215px;
+    top: 420px;
+}
+#spiralTime #h12 {
+    left: 120px;
+    top: 335px;
+}
+#spiralTime #h13 {
+    left: 125px;
+    top: 195px;
+}
+#spiralTime #h14 {
+    left: 215px;
+    top: 105px;
+}
+#spiralTime #h15 {
+    left: 360px;
+    top: 105px;
+}
+#spiralTime #h16 {
+    left: 450px;
+    top: 195px;
+}
+#spiralTime #h17 {
+    left: 465px;
+    top: 335px;
+}
+#spiralTime #h18 {
+    left: 390px;
+    top: 450px;
+}
+#spiralTime #h19 {
+    left: 260px;
+    top: 485px;
+}
+#spiralTime #h20 {
+    left: 125px;
+    top: 440px;
+}
+#spiralTime #h21 {
+    left: 60px;
+    top: 325px;
+}
+#spiralTime #h22 {
+    left: 65px;
+    top: 185px;
+}
+#spiralTime #h23 {
+    left: 145px;
+    top: 75px;
+}
+#spiralTime #h24 {
+    left: 280px;
+    top: 40px;
+}
