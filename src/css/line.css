@@ -1,0 +1,10 @@
+#line {
+    min-height: 200px;
+}
+
+#line .hour {
+    position: absolute;
+    color: red;
+    padding: 2px;
+    font-size: 12px;
+}
