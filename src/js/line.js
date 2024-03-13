@@ -19,10 +19,6 @@ elem += `</svg>`;
 
 line.innerHTML += elem;
 
-
-const path = line.querySelector("path#timePath");
-console.log(path.getTotalLength());
-
 for (let i = 0; i <= Math.floor(start*24/length); i++) {
     line.innerHTML += `<div class="hour" id="hl${i}" style="left:${i*480/24+15}px;top:${120}px;">${i}</div>`;
 }

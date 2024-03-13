@@ -71,7 +71,7 @@ let elem = `<svg width="520" height="520" xmlns="http://www.w3.org/2000/svg" id=
 
 elem += `<path d="m260 270 c`;
 elem = addSpiral(elem);
-elem += `" stroke="lightgreen" fill="transparent" stroke-width="40" stroke-linecap="butt"
+elem += `" stroke="lightgreen" fill="transparent" stroke-width="40" stroke-linecap="round"
     stroke-dasharray="1,1" stroke-dashoffset="0" id="timeBar" />`;
 
 elem += `</svg>`;
@@ -93,8 +93,8 @@ spiral.innerHTML = elem;
 
 const path = spiral.querySelector("path#timeBar");
 const total = path.getTotalLength() - 3;
-const time = (90 * total) / 60 / 24;
-const start = ((60 * 11 + 15) * total) / 60 / 24 ;
+const time = (90 * total) / 60 / 24 - 40;
+const start = ((60 * 11 + 15) * total) / 60 / 24 + 20;
 path.setAttribute("stroke-dasharray", `${time},${path.getTotalLength()}`);
 path.setAttribute("stroke-dashoffset", `-${start}`);
 const ticks = spiral.querySelector("path#timeTicks");
