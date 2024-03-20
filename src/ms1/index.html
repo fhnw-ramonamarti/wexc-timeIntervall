@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Milestzone 1</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../spiral/spiral.css" />
+        <link rel="stylesheet" href="../css/spiral.css" />
+        <link rel="stylesheet" href="../css/line.css" />
+        <link rel="stylesheet" href="../css/circles.css" />
+        <link rel="stylesheet" href="../css/circle.css" />
+        <link rel="stylesheet" href="../css/graph.css" />
+        <style>
+            .box {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow-x: scroll;
+            }
+            #links {
+                position: fixed;
+                top: 5px;
+                right: 10%;
+                width: 80%;
+                display: flex;
+                z-index: 10000;
+                background-color: yellow;
+                gap: 1rem;
+                font-size: 15pt;
+            }
+            #links a {
+                width: 20%;
+                padding: 1rem;
+                text-decoration: none;
+                color: black;
+                font-family: sans-serif;
+                font-weight: bold;
+            }
+            body {
+                color: rgb(30, 30, 30);
+                background-color: yellow;
+                font-size: 20pt;
+            }
+            div[id="2"] {
+                padding-top: 80px;
+            }
+            div .container[id] {
+                font-size: 12pt;
+            }
+            div[id="4"] {
+                flex-wrap: wrap;
+            }
+            #lineImg {
+                width: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="links">
+            <a href="#story" onclick="i=0">Merkmale</a>
+            <a href="#0" onclick="i=1">Uhr</a>
+            <a href="#1" onclick="i=2">Graph</a>
+            <a href="#2" onclick="i=3">Spirale</a>
+            <a href="#3" onclick="i=4">Kreise</a>
+            <a href="#4" onclick="i=-1">Linie</a>
+        </div>
+        <div class="box" id="story">
+            <ul>
+                <li>Raum-Reservation z.B. FHNW-Räume</li>
+                <li>Abschnitte von 15 Minuten</li>
+                <li>Startzeit, Endzeit, Dauer separat festlagbar</li>
+            </ul>
+        </div>
+        <div class="box" id="0">
+            <div class="container" id="circle"></div>
+        </div>
+        <div class="box" id="1">
+            <div class="container" id="graph"></div>
+        </div>
+        <div class="box" id="2">
+            <div class="container" id="spiral"></div>
+            <div class="container" id="spiralTime"></div>
+            <div class="container">
+                <a href="../../docs/Papierprototyp/Papierprototyp ef67e1c5f26442c995ce38fc60201727.html"> Prototype </a>
+            </div>
+        </div>
+        <div class="box" id="3">
+            <div class="container" id="circles"></div>
+        </div>
+        <div class="box" id="4">
+            <div class="container" id="line"></div>
+            <img src="./line-ex.png" alt="Example lines" id="lineImg" />
+        </div>
+        <script type="module" src="../spiral/spiral.js"></script>
+        <script type="module" src="../js/spiral.js"></script>
+        <script type="module" src="../js/line.js"></script>
+        <script type="module" src="../js/circles.js"></script>
+        <script type="module" src="../js/circle.js"></script>
+        <script type="module" src="../js/graph.js"></script>
+        <script type="module">
+            const links = ["#0", "#1", "#2", "#3", "#4", "#story"];
+            const href = window.location.href.split("#")[0];
+            let i = 0;
+            document.querySelector("body").onkeydown = (e) => {
+                if (e.code === "Space") {
+                    e.preventDefault();
+                    i %= links.length;
+                    window.location.href = href + links[i++];
+                }
+            };
+            const circle = document.querySelector("#circle svg");
+            const innerCircle = circle.querySelector("#innerCircle");
+            const outerCircle = circle.querySelector("#outerCircle");
+            innerCircle.setAttribute("stroke", `white`);
+            outerCircle.setAttribute("stroke", `white`);
+
+            let numbClicks = 0;
+            circle.onclick = () => {
+                if (numbClicks === 0) {
+                    innerCircle.setAttribute("stroke", `lightgreen`);
+                    outerCircle.setAttribute("stroke", `lightgreen`);
+                }
+                if (numbClicks === 1) {
+                    const innerCircle = circle.querySelector("#innerCircle");
+                    const innerTime = (2.75 * innerCircle.getTotalLength()) / 12;
+                    const innerStart = (8.25 * innerCircle.getTotalLength()) / 12;
+                    innerCircle.setAttribute("stroke-dasharray", `${innerTime},${innerCircle.getTotalLength()}`);
+                    innerCircle.setAttribute("stroke-dashoffset", `-${innerStart}`);
+                    innerCircle.setAttribute("stroke", `coral`);
+                    const outerCircle = circle.querySelector("#outerCircle");
+                    const outerTime = (1.5 * outerCircle.getTotalLength()) / 12;
+                    const outerStart = (1.5 * outerCircle.getTotalLength()) / 12;
+                    outerCircle.setAttribute("stroke-dasharray", `${outerTime},${outerCircle.getTotalLength()}`);
+                    outerCircle.setAttribute("stroke-dashoffset", `-${outerStart}`);
+                }
+                numbClicks++;
+            };
+
+            const graph = document.querySelector("#graph svg");
+
+            const spiral = document.querySelector("#spiral svg#time ");
+            document.querySelector("#spiral").onclick = () => {
+                const path = spiral.querySelector("path#timeBar");
+                spiral.setAttribute("style", `transform: rotateX(19deg) translateX(27px) translatey(-8px);`);
+                path.setAttribute("stroke-linecap", "mitter");
+            };
+
+            const line = document.querySelector("#line svg");
+           /* document.querySelector("#line").onclick = () => {
+                const length = 480;
+                const time = (180 * length) / 24 / 60;
+                const dist = Math.sqrt(Math.pow(time / 2, 2) / 2);
+                const start = ((60 * 11 + 15) * length) / 60 / 24;
+                const end = ((60 * 11 + 15) * length) / 60 / 24 + 2;
+
+                const pathLine = `m 10 110 l ${start} 0 l ${dist} ${-dist} l ${dist} ${dist} l ${end} 0`;
+
+                let elem = `<path d="m ${
+                    start + 10
+                } 110 l ${dist} ${-dist} l ${dist} ${dist} " stroke="transparent" fill="lightgreen" id="timeFill" />`;
+                elem += `<path d="${pathLine}" stroke="gray" fill="transparent" stroke-width="4" id="timeTickLM"  
+                        stroke-dasharray="1,${length / 24 / 4 - 1}" />`;
+                elem += `<path d="${pathLine}" stroke="black" fill="transparent" stroke-width="7" id="timeTickLH"  
+                        stroke-dasharray="1,${length / 24 - 1}" />`;
+                elem += `<path d="${pathLine}" stroke="black" fill="transparent" stroke-width="2" id="timePath" />`;
+                line += elem;
+
+                const lineC = document.querySelector("#line");
+                for (let i = 0; i <= 24; i++) {
+                    const e = document.querySelector(`hl${i}`);
+                    if (e) {
+                        e.setAttribute("style", `display:none;`);
+                    }
+                }
+                for (let i = 0; i <= Math.floor((start * 24) / length); i++) {
+                    document
+                        .querySelector(`#hl${i}`)
+                        .setAttribute("style", `display:bolck;left:${(i * 480) / 24 + 15}px;top:${120}px;`);
+                }
+                for (let i = Math.ceil(((start + time) * 24) / length); i <= 24; i++) {
+                    document
+                        .querySelector(`#hl${i}`)
+                        .setAttribute("style", `display:bolck;left:${(i * 480) / 24 + 15}px;top:${120}px;`);
+                }
+
+                lineC.innerHTML = elem;
+            };*/
+        </script>
+    </body>
+</html>

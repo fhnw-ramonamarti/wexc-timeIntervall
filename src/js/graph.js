@@ -11,7 +11,7 @@ elem += `<line x1="20" y1="20" x2="701" y2="20" stroke="black" />`;
 elem += `<line x1="20" y1="20" x2="20" y2="501" stroke="black" />`;
 elem += `<line x1="20" y1="20" x2="701" y2="20" stroke="black" stroke-width="5" stroke-dasharray="1,${hourX - 1}" />`;
 elem += `<line x1="20" y1="20" x2="20" y2="501" stroke="black" stroke-width="5" stroke-dasharray="1,${hourY - 1}" />`;
-elem += `<g>`;
+elem += `<g id="timeMarker">`;
 elem += `<line x1="${timeStartX}" y1="${timeY}" x2="${timeEndX}" y2="${timeY}" stroke="green" />`;
 elem += `<line x1="${timeStartX}" y1="${timeY - 3}" x2="${timeStartX}" y2="${
     timeY + 5

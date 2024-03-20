@@ -1,5 +1,5 @@
 #spiralTime {
-    width: 540px;
+    min-width: 540px;
     aspect-ratio: 1/1;
     position: relative;
 }
