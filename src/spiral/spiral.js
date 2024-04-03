@@ -27,10 +27,10 @@ for (let i = 0; i < 9; i++) {
     elem += `<circle r="${form}" cx="${form + 2}" cy="0" stroke="black" fill="transparent" stroke-width="2" />`;
     elem += `<circle r="${form}" cx="${
         form + 2
-    }" cy="0" stroke="gray" fill="transparent" stroke-width="7" class="min" id="m${i}" stroke-dashoffset="1" />`;
+    }" cy="0" stroke="gray" fill="transparent" stroke-width="7" class="min" id="m${i}" stroke-dashoffset="0,1" />`;
     elem += `<circle r="${form}" cx="${
         form + 2
-    }" cy="0" stroke="black" fill="transparent" stroke-width="10" class="hour" id="h${i}" stroke-dashoffset="1" />`;
+    }" cy="0" stroke="black" fill="transparent" stroke-width="13" class="hour" id="h${i}" stroke-dashoffset="0,1" />`;
     elem += `</svg>`;
     if (i % 2 == 0) {
         // top
@@ -44,9 +44,13 @@ for (let i = 0; i < 9; i++) {
 pathLength -= 0;
 spiral.innerHTML = elem;
 
+let j = 1;
 spiral.querySelectorAll("svg").forEach((e) => {
+    j *= -1;
     const pathM = e.querySelector(".min");
     pathM.setAttribute("stroke-dasharray", `1,${pathLength / 24 / 4 - 1}`);
+    pathM.setAttribute("stroke-dashoffset", `${0}`);
     const pathH = e.querySelector(".hour");
-    pathH.setAttribute("stroke-dasharray", `2,${pathLength / 24 - 2}`);
+    pathH.setAttribute("stroke-dasharray", `0,${pathLength / 24 - 0}`);
+    // pathH.setAttribute("stroke-dashoffset", `${(pathLength / 24 / 4) * j + pathLength / 24 / 2}`);
 });
