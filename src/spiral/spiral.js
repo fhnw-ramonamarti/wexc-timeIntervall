@@ -1,3 +1,5 @@
+import { all } from "./svgs.js";
+
 const spiral = document.querySelector("#spiralTime");
 
 // circle spiral
@@ -67,10 +69,33 @@ spiral.querySelectorAll("svg").forEach((e) => {
 });
 
 // segments
-const segments = spiral.querySelector("#segments");
-const path = (numb) => `../../seg/Ellipse ${numb}spiral.svg`;
-for (let i = 0; i < 97; i++) {
-    const img = `<img src="${path(i + 101)}" id="s${i}" class="seg" data-val=${i}/>`;
-    segments.innerHTML += img;
-}
+let startEnd;
+let clicked = false;
 
+const segments = spiral.querySelector("#segments");
+const inner = all.join("\n");
+segments.innerHTML += inner;
+
+[...segments.children].forEach((e) => {
+    e.setAttribute("data-value", e.id.slice(1));
+});
+
+for (let i = 0; i < 97; i++) {
+    const elem = segments.querySelector("#s" + i);
+    elem.addEventListener("mousedown", (e) => {
+        clicked = true;
+        if(!startEnd){
+            startEnd = [Number(e.target.closest("svg").getAttribute("data-value"))];
+        }
+    });
+    elem.addEventListener("mousemove", (e) => {
+        if (clicked) {
+        }
+    });
+    elem.addEventListener("mouseup", (e) => {
+        clicked = false;
+        startEnd = [...startEnd, Number(e.target.closest("svg").getAttribute("data-value")) + 1].sort();
+        // todo mark action
+        console.log(startEnd);
+    });
+}

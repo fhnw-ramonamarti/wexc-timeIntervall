@@ -126,10 +126,11 @@
     box-sizing: border-box;
     width: 480px;
     height: 490px;
-    /* margin-left: 2px; */
     scale: 0.95;
 }
+
 #spiralTime .seg {
+    display: inline-block;
     position: absolute;
     scale: 1.4;
     /* opacity: 0; */
