@@ -1,8 +1,8 @@
 const spiral = document.querySelector("#spiralTime");
 
-// cirvle spiral
-const yy = 260;
-let xx = 270;
+// circle spiral
+const yy = 268;
+let xx = 238;
 let size = 25;
 let elem = "";
 let dd = 0;
@@ -48,6 +48,7 @@ for (let i = 0; i < 9; i++) {
 pathLength = Math.floor(pathLength - pathLength / 24 / 4);
 spiral.innerHTML += elem;
 
+// ticks
 let j = 0;
 let offset = 0;
 spiral.querySelectorAll("svg").forEach((e) => {
@@ -55,20 +56,21 @@ spiral.querySelectorAll("svg").forEach((e) => {
     const rad = Math.floor(size * (e.id.substring(4) - 1 + 2) * Math.PI);
     const pathM = e.querySelector(".min");
     pathM.setAttribute("stroke-dasharray", `1,${(e.id.substring(4) == 0 ? 2 : 1) * (pathLength / 24 / 4 - 1)}`);
-    pathM.setAttribute("stroke-dashoffset", `${-(2 + offset + j * rad)}`);
+    pathM.setAttribute("stroke-dashoffset", `${-(3 + offset + j * rad)}`);
     const pathH = e.querySelector(".hour");
     pathH.setAttribute("stroke-dasharray", `2,${pathLength / 24 - 2}`);
-    pathH.setAttribute("stroke-dashoffset", `${-(2 + offset + j * rad)}`);
+    pathH.setAttribute("stroke-dashoffset", `${-(3 + offset + j * rad)}`);
     if (e.id.substring(4) == 0) {
         offset = pathLength / 24 / 4;
     }
     offset = pathLength / 24 - ((rad - offset) % (pathLength / 24));
 });
 
+// segments
 const segments = spiral.querySelector("#segments");
-console.log(spiral, segments);
 const path = (numb) => `../../seg/Ellipse ${numb}spiral.svg`;
 for (let i = 0; i < 97; i++) {
     const img = `<img src="${path(i + 101)}" id="s${i}" class="seg" data-val=${i}/>`;
     segments.innerHTML += img;
 }
+
