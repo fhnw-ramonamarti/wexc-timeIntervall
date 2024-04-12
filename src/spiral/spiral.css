@@ -14,11 +14,7 @@
 #spiralTime svg {
     position: absolute;
 }
-#spiralTime .segment {
-    z-index: 99;
-    /* transform-origin: center; */
-    /* scale: 0.9; */
-}
+
 .lll {
     transform: translate(0%,-100%);
 }
@@ -123,3 +119,406 @@
     left: 280px;
     top: 40px;
 }
+/* ------------- */
+#spiralTime .segments {
+    z-index: 10;
+    position: relative;
+    border: 1px solid #aa5555ff;
+    box-sizing: border-box;
+    width: 480px;
+    margin-left: 30px;
+    height: 480px;
+}
+#spiralTime .seg {
+    position: absolute;
+    scale: 1.38;
+}
+#spiralTime #s0 {
+    top: 220px;
+    left: 242px;
+}
+#spiralTime #s1 {
+    top: 235px;
+    left: 252px;
+}
+#spiralTime #s2 {
+    top: 253px;
+    left: 242px;
+}
+#spiralTime #s3 {
+    top: 254px;
+    left: 239px;
+}
+#spiralTime #s4 {
+    top: 254px;
+    left: 207px;
+}
+#spiralTime #s5 {
+    top: 253px;
+    left: 188px;
+}
+#spiralTime #s6 {
+    top: 227px;
+    left: 186px;
+}
+#spiralTime #s7 {
+    top: 193px;
+    left: 190px;
+}
+#spiralTime #s8 {
+    top: 174px;
+    left: 209px;
+}
+#spiralTime #s9 {
+    top: 168px;
+    left: 238px;
+}
+#spiralTime #s10 {
+    top: 168px;
+    left: 273px;
+}
+#spiralTime #s11 {
+    top: 177px;
+    left: 288px;
+}
+#spiralTime #s12 {
+    top: 199px;
+    left: 299px;
+}
+#spiralTime #s13 {
+    top: 236px;
+    left: 305px;
+}
+#spiralTime #s14 {
+    top: 266px;
+    left: 300px;
+}
+#spiralTime #s15 {
+    top: 283px;
+    left: 289px;
+}
+#spiralTime #s16 {
+    top: 300px;
+    left: 274px;
+}
+#spiralTime #s17 {
+    top: 309px;
+    left: 253px;
+}
+#spiralTime #s18 {
+    top: 314px;
+    left: 218px;
+}
+#spiralTime #s19 {
+    top: 308px;
+    left: 186px;
+}
+#spiralTime #s20 {
+    top: 296px;
+    left: 156px;
+}
+#spiralTime #s21 {
+    top: 276px;
+    left: 139px;
+}
+#spiralTime #s22 {
+    top: 254px;
+    left: 131px;
+}
+#spiralTime #s23 {
+    top: 216px;
+    left: 130px;
+}
+#spiralTime #s24 {
+    top: 181px;
+    left: 134px;
+}
+#spiralTime #s25 {
+    top: 153px;
+    left: 148px;
+}
+#spiralTime #s26 {
+    top: 132px;
+    left: 171px;
+}
+#spiralTime #s27 {
+    top: 117px;
+    left: 201px;
+}
+#spiralTime #s28 {
+    top: 111px;
+    left: 235px;
+}
+#spiralTime #s29 {
+    top: 112px;
+    left: 271px;
+}
+#spiralTime #s30 {
+    top: 116px;
+    left: 296px;
+}
+#spiralTime #s31 {
+    top: 130px;
+    left: 319px;
+}
+#spiralTime #s32 {
+    top: 152px;
+    left: 338px;
+}
+#spiralTime #s33 {
+    top: 180px;
+    left: 352px;
+}
+#spiralTime #s34 {
+    top: 215px;
+    left: 361px;
+}
+#spiralTime #s35 {
+    top: 254px;
+    left: 363px;
+}
+#spiralTime #s36 {
+    top: 278px;
+    left: 356px;
+}
+#spiralTime #s37 {
+    top: 302px;
+    left: 344px;
+}
+#spiralTime #s38 {
+    top: 325px;
+    left: 324px;
+}
+#spiralTime #s39 {
+    top: 345px;
+    left: 302px;
+}
+#spiralTime #s40 {
+    top: 359px;
+    left: 278px;
+}
+#spiralTime #s41 {
+    top: 368px;
+    left: 250px;
+}
+#spiralTime #s42 {
+    top: 370px;
+    left: 217px;
+}
+#spiralTime #s43 {
+    top: 363px;
+    left: 180px;
+}
+#spiralTime #s44 {
+    top: 352px;
+    left: 146px;
+}
+#spiralTime #s45 {
+    top: 336px;
+    left: 118px;
+}
+#spiralTime #s46 {
+    top: 315px;
+    left: 98px;
+}
+#spiralTime #s47 {
+    top: 290px;
+    left: 83px;
+}
+#spiralTime #s48 {
+    top: 262px;
+    left: 74px;
+}
+#spiralTime #s49 {
+    top: 228px;
+    left: 72px;
+}
+#spiralTime #s50 {
+    top: 191px;
+    left: 74px;
+}
+#spiralTime #s51 {
+    top: 157px;
+    left: 82px;
+}
+#spiralTime #s52 {
+    top: 127px;
+    left: 97px;
+}
+#spiralTime #s53 {
+    top: 101px;
+    left: 118px;
+}
+#spiralTime #s54 {
+    top: 79px;
+    left: 144px;
+}
+#spiralTime #s55 {
+    top: 66px;
+    left: 174px;
+}
+#spiralTime #s56 {
+    top: 59px;
+    left: 206px;
+}
+#spiralTime #s57 {
+    top: 57px;
+    left: 242px;
+}
+#spiralTime #s58 {
+    top: 58px;
+    left: 279px;
+}
+#spiralTime #s59 {
+    top: 63px;
+    left: 308px;
+}
+#spiralTime #s60 {
+    top: 75px;
+    left: 337px;
+}
+#spiralTime #s61 {
+    top: 94px;
+    left: 360px;
+}
+#spiralTime #s62 {
+    top: 118px;
+    left: 381px;
+}
+#spiralTime #s63 {
+    top: 145px;
+    left: 398px;
+}
+#spiralTime #s64 {
+    top: 177px;
+    left: 411px;
+}
+#spiralTime #s65 {
+    top: 212px;
+    left: 419px;
+}
+#spiralTime #s66 {
+    top: 249px;
+    left: 421px;
+}
+#spiralTime #s67 {
+    top: 280px;
+    left: 414px;
+}
+#spiralTime #s68 {
+    top: 310px;
+    left: 403px;
+}
+#spiralTime #s69 {
+    top: 336px;
+    left: 388px;
+}
+#spiralTime #s70 {
+    top: 360px;
+    left: 369px;
+}
+#spiralTime #s71 {
+    top: 381px;
+    left: 346px;
+}
+#spiralTime #s72 {
+    top: 400px;
+    left: 321px;
+}
+#spiralTime #s73 {
+    top: 413px;
+    left: 292px;
+}
+#spiralTime #s74 {
+    top: 422px;
+    left: 265px;
+}
+#spiralTime #s75 {
+    top: 426px;
+    left: 232px;
+}
+#spiralTime #s76 {
+    top: 425px;
+    left: 195px;
+}
+#spiralTime #s77 {
+    top: 417px;
+    left: 160px;
+}
+#spiralTime #s78 {
+    top: 404px;
+    left: 129px;
+}
+#spiralTime #s79 {
+    top: 387px;
+    left: 100px;
+}
+#spiralTime #s80 {
+    top: 367px;
+    left: 74px;
+}
+#spiralTime #s81 {
+    top: 342px;
+    left: 54px;
+}
+#spiralTime #s82 {
+    top: 317px;
+    left: 38px;
+}
+#spiralTime #s83 {
+    top: 289px;
+    left: 28px;
+}
+#spiralTime #s84 {
+    top: 259px;
+    left: 22px;
+}
+#spiralTime #s85 {
+    top: 224px;
+    left: 20px;
+}
+#spiralTime #s86 {
+    top: 187px;
+    left: 22px;
+}
+#spiralTime #s87 {
+    top: 154px;
+    left: 29px;
+}
+#spiralTime #s88 {
+    top: 122px;
+    left: 40px;
+}
+#spiralTime #s89 {
+    top: 92px;
+    left: 56px;
+}
+#spiralTime #s90 {
+    top: 67px;
+    left: 78px;
+}
+#spiralTime #s91 {
+    top: 43px;
+    left: 104px;
+}
+#spiralTime #s92 {
+    top: 25px;
+    left: 134px;
+}
+#spiralTime #s93 {
+    top: 11px;
+    left: 166px;
+}
+#spiralTime #s94 {
+    top: 5px;
+    left: 201px;
+}
+#spiralTime #s95 {
+    top: 1px;
+    left: 236px;
+}
+#spiralTime #s96 {
+    top: 1px;
+    left: 268px;
+}
+

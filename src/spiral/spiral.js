@@ -3,13 +3,13 @@ const spiral = document.querySelector("#spiralTime");
 // cirvle spiral
 const yy = 260;
 let xx = 270;
-let size = 25;
+let size = 27;
 let elem = "";
 let dd = 0;
 let pathLength = 0;
 for (let i = 0; i < 9; i++) {
     let form = size * i + size;
-    pathLength += (form * Math.PI);
+    pathLength += form * Math.PI;
     if (i % 2 != 0) {
         // bottom
         xx -= size * i;
@@ -22,7 +22,9 @@ for (let i = 0; i < 9; i++) {
     }" height=""${form}" xmlns="http://www.w3.org/2000/svg" id="time${i}" class=" ${
         i % 2 == 0 ? "lll" : "rrr"
     }"  viewbox=" ${
-        i % 2 == 0 ? `-10 -${form + 10} ${i == 8 ? form + 20 : form * 2 + 20} ${form+10}` : `-10 0 ${i == 8 ? form + 20 : form * 2 + 20} ${form+10}`
+        i % 2 == 0
+            ? `-10 -${form + 10} ${i == 8 ? form + 20 : form * 2 + 20} ${form + 10}`
+            : `-10 0 ${i == 8 ? form + 20 : form * 2 + 20} ${form + 10}`
     }" style="top:${yy}px;left:${xx - (size * i) / 2 - size / 2 - dd}px;width:${
         i == 8 ? form + 20 : form * 2 + 20
     }px;height:${form + 10}px">`;
@@ -40,22 +42,33 @@ for (let i = 0; i < 9; i++) {
         dd = 0;
     }
     if (i == 8) {
-        pathLength -= ((form * Math.PI) / 2);
+        pathLength -= (form * Math.PI) / 2;
     }
 }
-pathLength = Math.floor(pathLength);
-spiral.innerHTML = elem;
+pathLength = Math.floor(pathLength - pathLength / 24 / 4);
+spiral.innerHTML += elem;
 
 let j = 0;
 let offset = 0;
 spiral.querySelectorAll("svg").forEach((e) => {
     j = j == 1 ? 0 : 1;
-    const rad = Math.floor(size * (e.id.substring(4)-1+2)*Math.PI);
+    const rad = Math.floor(size * (e.id.substring(4) - 1 + 2) * Math.PI);
     const pathM = e.querySelector(".min");
-    pathM.setAttribute("stroke-dasharray", `1,${(pathLength / 24 / 4-1)}`);
-    pathM.setAttribute("stroke-dashoffset", `${-(2+offset+j*rad)}`);
+    pathM.setAttribute("stroke-dasharray", `1,${(e.id.substring(4) == 0 ? 2 : 1) * (pathLength / 24 / 4 - 1)}`);
+    pathM.setAttribute("stroke-dashoffset", `${-(2 + offset + j * rad)}`);
     const pathH = e.querySelector(".hour");
-    pathH.setAttribute("stroke-dasharray", `2,${(pathLength / 24-2) }`);
-    pathH.setAttribute("stroke-dashoffset", `${-(2+offset+j*rad)}`);
-    offset = ((pathLength / 24) - ((rad - offset) % (pathLength / 24)));
+    pathH.setAttribute("stroke-dasharray", `2,${pathLength / 24 - 2}`);
+    pathH.setAttribute("stroke-dashoffset", `${-(2 + offset + j * rad)}`);
+    if (e.id.substring(4) == 0) {
+        offset = pathLength / 24 / 4;
+    }
+    offset = pathLength / 24 - ((rad - offset) % (pathLength / 24));
 });
+
+const segments = spiral.querySelector("#segments");
+console.log(spiral, segments);
+const path = (numb) => `../../seg/Ellipse ${numb}spiral.svg`;
+for (let i = 0; i < 97; i++) {
+    const img = `<img src="${path(i + 101)}" id="s${i}" class="seg" data-val=${i}/>`;
+    segments.innerHTML += img;
+}
