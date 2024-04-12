@@ -128,10 +128,11 @@
     width: 480px;
     margin-left: 30px;
     height: 480px;
+    scale: 0.95;
 }
 #spiralTime .seg {
     position: absolute;
-    scale: 1.38;
+    scale: 1.4;
 }
 #spiralTime #s0 {
     top: 220px;
@@ -151,7 +152,7 @@
 }
 #spiralTime #s4 {
     top: 254px;
-    left: 207px;
+    left: 206px;
 }
 #spiralTime #s5 {
     top: 253px;
@@ -166,8 +167,8 @@
     left: 190px;
 }
 #spiralTime #s8 {
-    top: 174px;
-    left: 209px;
+    top: 173px;
+    left: 208px;
 }
 #spiralTime #s9 {
     top: 168px;
@@ -178,20 +179,20 @@
     left: 273px;
 }
 #spiralTime #s11 {
-    top: 177px;
+    top: 176px;
     left: 288px;
 }
 #spiralTime #s12 {
-    top: 199px;
+    top: 198px;
     left: 299px;
 }
 #spiralTime #s13 {
-    top: 236px;
-    left: 305px;
+    top: 235px;
+    left: 306px;
 }
 #spiralTime #s14 {
-    top: 266px;
-    left: 300px;
+    top: 265px;
+    left: 302px;
 }
 #spiralTime #s15 {
     top: 283px;
@@ -202,15 +203,15 @@
     left: 274px;
 }
 #spiralTime #s17 {
-    top: 309px;
+    top: 310px;
     left: 253px;
 }
 #spiralTime #s18 {
-    top: 314px;
+    top: 315px;
     left: 218px;
 }
 #spiralTime #s19 {
-    top: 308px;
+    top: 309px;
     left: 186px;
 }
 #spiralTime #s20 {

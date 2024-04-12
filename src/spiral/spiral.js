@@ -3,7 +3,7 @@ const spiral = document.querySelector("#spiralTime");
 // cirvle spiral
 const yy = 260;
 let xx = 270;
-let size = 27;
+let size = 25;
 let elem = "";
 let dd = 0;
 let pathLength = 0;
