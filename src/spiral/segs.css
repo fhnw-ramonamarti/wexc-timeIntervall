@@ -1,0 +1,395 @@
+
+#spiralTime .seg {
+    display: inline;
+    position: absolute;
+    scale: 1.4;
+    /* opacity: 0; */
+}
+#spiralTime #s0 {
+    top: 230px;
+    left: 242px;
+}
+#spiralTime #s1 {
+    top: 245px;
+    left: 252px;
+}
+#spiralTime #s2 {
+    top: 263px;
+    left: 242px;
+}
+#spiralTime #s3 {
+    top: 264px;
+    left: 239px;
+}
+#spiralTime #s4 {
+    top: 264px;
+    left: 206px;
+}
+#spiralTime #s5 {
+    top: 263px;
+    left: 188px;
+}
+#spiralTime #s6 {
+    top: 237px;
+    left: 186px;
+}
+#spiralTime #s7 {
+    top: 203px;
+    left: 190px;
+}
+#spiralTime #s8 {
+    top: 183px;
+    left: 208px;
+}
+#spiralTime #s9 {
+    top: 178px;
+    left: 238px;
+}
+#spiralTime #s10 {
+    top: 178px;
+    left: 273px;
+}
+#spiralTime #s11 {
+    top: 186px;
+    left: 288px;
+}
+#spiralTime #s12 {
+    top: 208px;
+    left: 299px;
+}
+#spiralTime #s13 {
+    top: 245px;
+    left: 306px;
+}
+#spiralTime #s14 {
+    top: 275px;
+    left: 302px;
+}
+#spiralTime #s15 {
+    top: 293px;
+    left: 289px;
+}
+#spiralTime #s16 {
+    top: 310px;
+    left: 274px;
+}
+#spiralTime #s17 {
+    top: 320px;
+    left: 253px;
+}
+#spiralTime #s18 {
+    top: 325px;
+    left: 218px;
+}
+#spiralTime #s19 {
+    top: 319px;
+    left: 186px;
+}
+#spiralTime #s20 {
+    top: 306px;
+    left: 156px;
+}
+#spiralTime #s21 {
+    top: 286px;
+    left: 139px;
+}
+#spiralTime #s22 {
+    top: 264px;
+    left: 131px;
+}
+#spiralTime #s23 {
+    top: 226px;
+    left: 130px;
+}
+#spiralTime #s24 {
+    top: 191px;
+    left: 134px;
+}
+#spiralTime #s25 {
+    top: 163px;
+    left: 148px;
+}
+#spiralTime #s26 {
+    top: 142px;
+    left: 171px;
+}
+#spiralTime #s27 {
+    top: 127px;
+    left: 201px;
+}
+#spiralTime #s28 {
+    top: 121px;
+    left: 235px;
+}
+#spiralTime #s29 {
+    top: 122px;
+    left: 271px;
+}
+#spiralTime #s30 {
+    top: 126px;
+    left: 296px;
+}
+#spiralTime #s31 {
+    top: 140px;
+    left: 319px;
+}
+#spiralTime #s32 {
+    top: 162px;
+    left: 338px;
+}
+#spiralTime #s33 {
+    top: 190px;
+    left: 352px;
+}
+#spiralTime #s34 {
+    top: 225px;
+    left: 361px;
+}
+#spiralTime #s35 {
+    top: 264px;
+    left: 363px;
+}
+#spiralTime #s36 {
+    top: 288px;
+    left: 356px;
+}
+#spiralTime #s37 {
+    top: 312px;
+    left: 344px;
+}
+#spiralTime #s38 {
+    top: 335px;
+    left: 324px;
+}
+#spiralTime #s39 {
+    top: 355px;
+    left: 302px;
+}
+#spiralTime #s40 {
+    top: 369px;
+    left: 278px;
+}
+#spiralTime #s41 {
+    top: 378px;
+    left: 250px;
+}
+#spiralTime #s42 {
+    top: 380px;
+    left: 217px;
+}
+#spiralTime #s43 {
+    top: 373px;
+    left: 180px;
+}
+#spiralTime #s44 {
+    top: 362px;
+    left: 146px;
+}
+#spiralTime #s45 {
+    top: 346px;
+    left: 118px;
+}
+#spiralTime #s46 {
+    top: 325px;
+    left: 98px;
+}
+#spiralTime #s47 {
+    top: 300px;
+    left: 83px;
+}
+#spiralTime #s48 {
+    top: 272px;
+    left: 74px;
+}
+#spiralTime #s49 {
+    top: 238px;
+    left: 72px;
+}
+#spiralTime #s50 {
+    top: 201px;
+    left: 74px;
+}
+#spiralTime #s51 {
+    top: 167px;
+    left: 82px;
+}
+#spiralTime #s52 {
+    top: 137px;
+    left: 97px;
+}
+#spiralTime #s53 {
+    top: 111px;
+    left: 118px;
+}
+#spiralTime #s54 {
+    top: 89px;
+    left: 144px;
+}
+#spiralTime #s55 {
+    top: 76px;
+    left: 174px;
+}
+#spiralTime #s56 {
+    top: 69px;
+    left: 206px;
+}
+#spiralTime #s57 {
+    top: 67px;
+    left: 242px;
+}
+#spiralTime #s58 {
+    top: 68px;
+    left: 279px;
+}
+#spiralTime #s59 {
+    top: 73px;
+    left: 308px;
+}
+#spiralTime #s60 {
+    top: 85px;
+    left: 337px;
+}
+#spiralTime #s61 {
+    top: 104px;
+    left: 360px;
+}
+#spiralTime #s62 {
+    top: 128px;
+    left: 381px;
+}
+#spiralTime #s63 {
+    top: 155px;
+    left: 398px;
+}
+#spiralTime #s64 {
+    top: 187px;
+    left: 411px;
+}
+#spiralTime #s65 {
+    top: 222px;
+    left: 419px;
+}
+#spiralTime #s66 {
+    top: 259px;
+    left: 421px;
+}
+#spiralTime #s67 {
+    top: 290px;
+    left: 414px;
+}
+#spiralTime #s68 {
+    top: 320px;
+    left: 403px;
+}
+#spiralTime #s69 {
+    top: 346px;
+    left: 388px;
+}
+#spiralTime #s70 {
+    top: 370px;
+    left: 369px;
+}
+#spiralTime #s71 {
+    top: 391px;
+    left: 346px;
+}
+#spiralTime #s72 {
+    top: 410px;
+    left: 321px;
+}
+#spiralTime #s73 {
+    top: 423px;
+    left: 292px;
+}
+#spiralTime #s74 {
+    top: 432px;
+    left: 265px;
+}
+#spiralTime #s75 {
+    top: 436px;
+    left: 232px;
+}
+#spiralTime #s76 {
+    top: 435px;
+    left: 195px;
+}
+#spiralTime #s77 {
+    top: 427px;
+    left: 160px;
+}
+#spiralTime #s78 {
+    top: 414px;
+    left: 129px;
+}
+#spiralTime #s79 {
+    top: 397px;
+    left: 100px;
+}
+#spiralTime #s80 {
+    top: 377px;
+    left: 74px;
+}
+#spiralTime #s81 {
+    top: 352px;
+    left: 54px;
+}
+#spiralTime #s82 {
+    top: 327px;
+    left: 38px;
+}
+#spiralTime #s83 {
+    top: 299px;
+    left: 28px;
+}
+#spiralTime #s84 {
+    top: 269px;
+    left: 22px;
+}
+#spiralTime #s85 {
+    top: 234px;
+    left: 20px;
+}
+#spiralTime #s86 {
+    top: 197px;
+    left: 22px;
+}
+#spiralTime #s87 {
+    top: 164px;
+    left: 29px;
+}
+#spiralTime #s88 {
+    top: 132px;
+    left: 40px;
+}
+#spiralTime #s89 {
+    top: 102px;
+    left: 56px;
+}
+#spiralTime #s90 {
+    top: 77px;
+    left: 78px;
+}
+#spiralTime #s91 {
+    top: 53px;
+    left: 104px;
+}
+#spiralTime #s92 {
+    top: 35px;
+    left: 134px;
+}
+#spiralTime #s93 {
+    top: 21px;
+    left: 166px;
+}
+#spiralTime #s94 {
+    top: 15px;
+    left: 201px;
+}
+#spiralTime #s95 {
+    top: 11px;
+    left: 236px;
+}
+#spiralTime #s96 {
+    top: 11px;
+    left: 268px;
+}
