@@ -87,8 +87,6 @@ let start = -1;
 let clicked = false;
 
 let segments = spiral.querySelector("#segments");
-// const inner = all.join("\n");
-// segments.innerHTML += inner;
 segments.innerHTML += all;
 segments = segments.querySelector("#frags");
 
@@ -123,9 +121,6 @@ let c = 0;
     elem.addEventListener("mouseup", (e) => {
         clicked = false;
         updateSelection(e);
-
-        // todo mark action
-        console.log(startEnd);
     });
 });
 segments.addEventListener("mouseleave", (e) => {
@@ -136,7 +131,6 @@ pathLength /= 2;
 circs = circs.map((e) => e / 2);
 circs2 = circs2.map((e) => e / 2);
 offs = offs.map((e) => e / 2);
-// 5 11 15 22 33
 const updateSelection = (e) => {
     console.log("click", e.target.id);
     spiral.querySelectorAll(".mark").forEach((e) => {

@@ -124,15 +124,30 @@
     z-index: 100;
     position: relative;
     box-sizing: border-box;
-    width: 480px;
-    height: 490px;
     display: flex;
     justify-content: center;
     align-items: center;
+/* for line frags */
+    width: 490px;
+    height: 490px;
+/* for bigger frags */
+    /* width: 480px;
+    height: 490px; */
 }
+
+/* for line frags */
 #spiralTime #frags {
     display: inline;
     scale: 1.3;
-    margin-left: 5px;
+    margin-top: 20px;
+    margin-left: 25px;
     /* opacity: 0; */
 }
+
+/* for bigger frags */
+/* #spiralTime #frags {
+    display: inline;
+    scale: 1.3;
+    margin-left: 5px;
+    opacity: 0;
+} */
