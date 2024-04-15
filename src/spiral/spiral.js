@@ -34,9 +34,9 @@ for (let i = 0; i < 9; i++) {
     }" style="top:${yy}px;left:${xx - (size * i) / 2 - size / 2 - dd}px;width:${
         i == 8 ? form + 20 : form * 2 + 20
     }px;height:${form + 10}px;z-index:${10 - i};">`;
-    elem += `<circle r="${form / 2}" cx="${
-        form + 2
-    }" cy="0" stroke="white" fill="transparent" stroke-width="${form}" />`;
+    // elem += `<circle r="${form / 2}" cx="${
+    //     form + 2
+    // }" cy="0" stroke="white" fill="transparent" stroke-width="${form}" />`;
     elem += `<circle r="${form / 2}" cx="${
         form + 2
     }" cy="0" stroke="lightgreen" fill="transparent" stroke-width="${form}" stroke-dasharray="0,1" class="mark" id="mark${i}" />`;
@@ -82,8 +82,9 @@ spiral.querySelectorAll("svg").forEach((e) => {
 });
 
 // segments
-let startEnd = [];
+let startEnd = [-1, -1];
 let start = -1;
+let currClick;
 let clicked = false;
 
 let segments = spiral.querySelector("#segments");
@@ -95,66 +96,120 @@ let cc = 0;
     e.setAttribute("data-value", cc);
     e.setAttribute("id", `s${cc++}`);
     e.setAttribute("class", `seg`);
+    e.setAttribute("fill", "lightgreen");
 });
 
-// segment actions
-// todo not correct
-let c = 0;
+// using fragments coloring
 [...segments.children].forEach((elem) => {
     elem.addEventListener("mousedown", (e) => {
         clicked = true;
         let temp = Number(e.target.getAttribute("data-value"));
         if (start == -1 || temp >= startEnd[1] || temp < startEnd[0]) {
             start = temp;
-            spiral.querySelectorAll(".mark").forEach((e) => {
-                e.setAttribute("stroke-dasharray", `0,1`);
-                e.setAttribute("stroke-dashoffset", `0`);
-            });
-            spiral.dispatchEvent(new Event("mouseenter"));
+            currClick = null;
+            e.target.setAttribute("fill-opacity", 1);
+            for (let i = 0; i < 96; i++) {
+                const elemI = segments.querySelector("#s" + i);
+                elemI.setAttribute("fill-opacity", 0);
+            }
+        } else {
+            currClick = temp;
         }
     });
     elem.addEventListener("mouseenter", (e) => {
         if (clicked) {
-            updateSelection(e);
+            // updateSelection(e);
+            fillSegs(e.target);
         }
     });
     elem.addEventListener("mouseup", (e) => {
         clicked = false;
-        updateSelection(e);
     });
 });
 segments.addEventListener("mouseleave", (e) => {
     clicked = false;
 });
 
-pathLength /= 2;
-circs = circs.map((e) => e / 2);
-circs2 = circs2.map((e) => e / 2);
-offs = offs.map((e) => e / 2);
-const updateSelection = (e) => {
-    console.log("click", e.target.id);
-    spiral.querySelectorAll(".mark").forEach((e) => {
-        e.setAttribute("stroke-dasharray", `0,1`);
-        e.setAttribute("stroke-dashoffset", `0`);
-    });
-    startEnd = [start, Number(e.target.getAttribute("data-value")) + 1].sort((a, b) => a - b);
-    let inxS = circs.findLastIndex((e) => e < (pathLength / 24 / 4) * startEnd[0]) + 1;
-    let inxE = circs.findIndex((e) => e > (pathLength / 24 / 4) * startEnd[1]);
-    console.log(inxS, inxE, startEnd);
-    spiral.querySelectorAll(".mark").forEach((e, i) => {
-        if (i >= inxS && i <= inxE) {
-            let tmp = (x) => (i == 0 ? (pathLength / 24 / 4) * x : circs[i - 1] - (pathLength / 24 / 4) * (x + 1) - 2);
-            if (i == inxS) {
-                let j = i % 2 == 0 ? circs2[i] : 0;
-                e.setAttribute("stroke-dashoffset", `${-(1 + Math.abs(tmp(startEnd[0])) + j)}`);
-            }
-            if (i == inxE) {
-                const q = Math.abs((pathLength / 24 / 4) * (startEnd[1] - startEnd[0])) * (i == 0 ? 2 : 1) - 2;
-                e.setAttribute("stroke-dasharray", `${q},${pathLength}`);
-            } else {
-                e.setAttribute("stroke-dasharray", `1,0`);
-            }
-            console.log(circs2[i], e.getAttribute("stroke-dashoffset"), e.getAttribute("stroke-dasharray"));
+// using fragments coloring
+const fillSegs = (e) => {
+    const end = Number(e.getAttribute("data-value"));
+    if (currClick) {
+        const diff = end - currClick;
+        startEnd = [start + currClick, end + currClick];
+        for (let i = 0; i < 96; i++) {
+            const elemI = segments.querySelector("#s" + i);
+            elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
         }
-    });
+    } else {
+        startEnd = [start, end].sort((a, b) => a - b);
+        console.log(startEnd, start, end);
+        for (let i = 0; i < 96; i++) {
+            const elemI = segments.querySelector("#s" + i);
+            elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
+        }
+    }
 };
+// ----------------------------------------------------------------
+
+
+// segment actions
+// todo not correct for circle
+// using circle coloring
+// let c = 0;
+// [...segments.children].forEach((elem) => {
+//     elem.addEventListener("mousedown", (e) => {
+//         clicked = true;
+//         let temp = Number(e.target.getAttribute("data-value"));
+//         if (start == -1 || temp >= startEnd[1] || temp < startEnd[0]) {
+//             start = temp;
+//             spiral.querySelectorAll(".mark").forEach((e) => {
+//                 e.setAttribute("stroke-dasharray", `0,1`);
+//                 e.setAttribute("stroke-dashoffset", `0`);
+//             });
+//             spiral.dispatchEvent(new Event("mouseenter"));
+//         }
+//     });
+//     elem.addEventListener("mouseenter", (e) => {
+//         if (clicked) {
+//             updateSelection(e);
+//         }
+//     });
+//     elem.addEventListener("mouseup", (e) => {
+//         clicked = false;
+//         updateSelection(e);
+//     });
+// });
+
+
+// using cicle coloring
+// pathLength /= 2;
+// circs = circs.map((e) => e / 2);
+// circs2 = circs2.map((e) => e / 2);
+// offs = offs.map((e) => e / 2);
+// const updateSelection = (e) => {
+//     console.log("click", e.target.id);
+//     spiral.querySelectorAll(".mark").forEach((e) => {
+//         e.setAttribute("stroke-dasharray", `0,1`);
+//         e.setAttribute("stroke-dashoffset", `0`);
+//     });
+//     startEnd = [start, Number(e.target.getAttribute("data-value")) + 1].sort((a, b) => a - b);
+//     let inxS = circs.findLastIndex((e) => e < (pathLength / 24 / 4) * startEnd[0]) + 1;
+//     let inxE = circs.findIndex((e) => e > (pathLength / 24 / 4) * startEnd[1]);
+//     console.log(inxS, inxE, startEnd);
+//     spiral.querySelectorAll(".mark").forEach((e, i) => {
+//         if (i >= inxS && i <= inxE) {
+//             let tmp = (x) => (i == 0 ? (pathLength / 24 / 4) * x : circs[i - 1] - (pathLength / 24 / 4) * (x + 1) - 2);
+//             if (i == inxS) {
+//                 let j = i % 2 == 0 ? circs2[i] : 0;
+//                 e.setAttribute("stroke-dashoffset", `${-(1 + Math.abs(tmp(startEnd[0])) + j)}`);
+//             }
+//             if (i == inxE) {
+//                 const q = Math.abs((pathLength / 24 / 4) * (startEnd[1] - startEnd[0])) * (i == 0 ? 2 : 1) - 2;
+//                 e.setAttribute("stroke-dasharray", `${q},${pathLength}`);
+//             } else {
+//                 e.setAttribute("stroke-dasharray", `1,0`);
+//             }
+//             console.log(circs2[i], e.getAttribute("stroke-dashoffset"), e.getAttribute("stroke-dasharray"));
+//         }
+//     });
+// };
