@@ -135,22 +135,25 @@ const fillSegs = (e) => {
     const end = Number(e.getAttribute("data-value"));
     if (currClick) {
         const diff = end - currClick;
-        startEnd = [start + currClick, end + currClick];
-        for (let i = 0; i < 96; i++) {
-            const elemI = segments.querySelector("#s" + i);
-            elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
+        if (startEnd[0] + diff >= 0 && startEnd[1] + diff < 96) {
+            start = startEnd[0] + diff;
+            currClick = end;
+            startEnd = [start, startEnd[1] + diff];
+            for (let i = 0; i < 96; i++) {
+                const elemI = segments.querySelector("#s" + i);
+                elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
+            }
         }
     } else {
         startEnd = [start, end].sort((a, b) => a - b);
-        console.log(startEnd, start, end);
         for (let i = 0; i < 96; i++) {
             const elemI = segments.querySelector("#s" + i);
             elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
         }
     }
+    console.log(startEnd, start, end);
 };
 // ----------------------------------------------------------------
-
 
 // segment actions
 // todo not correct for circle
@@ -179,7 +182,6 @@ const fillSegs = (e) => {
 //         updateSelection(e);
 //     });
 // });
-
 
 // using cicle coloring
 // pathLength /= 2;
