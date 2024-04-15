@@ -171,7 +171,6 @@ const fillSegs = (e) => {
             elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
         }
     }
-    console.log(startEnd, start, end);
 };
 // ----------------------------------------------------------------
 
