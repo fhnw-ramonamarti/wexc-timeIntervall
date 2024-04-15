@@ -1,6 +1,6 @@
 export { allMore, all };
 const all = `
-<svg width="390" height="390" viewBox="0 0 390 390" id="frags" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="390" height="390" viewBox="0 0 390 390" id="frags" class="frags" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M181 197C183.5 174 211.5 172 218 188.5L181 197Z"                                                                                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M218 188.5L181 197L216 214C220.382 204.19 221.088 198.618 218 188.5Z"                                                                 fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M216 214L181 197L198 231.5C206.214 227.394 210.224 223.703 216 214Z"                                                                  fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
@@ -100,7 +100,7 @@ const all = `
 </svg>
 `;
 const allMore = `
-<svg width="360" height="360" viewBox="0 0 360 360" id="frags" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="360" height="360" viewBox="0 0 360 360" id="frags" class="frags" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M181.701 192.484L173.471 189.579C173.799 184.674 175.49 180.111 178.257 176.391C181.055 172.427 184.872 169.455 189.222 167.847C193.573 166.24 199.689 166.008 204.131 167.489C206.281 168.206 209.01 169.569 211.511 171.314C213.924 172.996 216.103 175.018 217.353 177.133L181.701 192.484Z" fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>
 <path d="M221.46 191.27L221.46 191.27L221.461 191.275C221.708 193.99 221.338 196.962 220.778 199.511C220.253 201.903 219.565 203.902 219.08 204.946L181.919 192.722L217.611 177.565C218.833 179.525 219.663 181.213 220.251 183.234C220.858 185.322 221.211 187.776 221.46 191.27Z"                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>
 <path d="M213.506 215.607C211.057 219.036 208.609 221.498 203.752 224.917L173.993 190.28L218.858 205.397C218.308 206.509 217.835 207.539 217.383 208.522C216.247 210.993 215.246 213.171 213.506 215.607Z"                                                                                               fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>

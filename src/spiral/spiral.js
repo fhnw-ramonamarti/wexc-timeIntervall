@@ -58,7 +58,7 @@ for (let i = 0; i < 9; i++) {
     }
 }
 pathLength = Math.floor(pathLength - pathLength / 24 / 4);
-spiral.innerHTML += elem;
+spiral.querySelector("#circles").innerHTML += elem;
 
 // ticks
 let j = 0;
@@ -81,38 +81,57 @@ spiral.querySelectorAll("svg").forEach((e) => {
     offs.push(offset);
 });
 
+// numbers ticks
+for (let i = 0; i <= 24; i++) {
+    spiral.querySelector("#numbs").innerHTML += `<div class="hour" id="hi${i}">${i}</div>`;
+}
+
 // segments
 let startEnd = [-1, -1];
 let start = -1;
 let currClick;
 let clicked = false;
 
-let segments = spiral.querySelector("#segments");
-segments.innerHTML += all;
-segments = segments.querySelector("#frags");
+spiral.querySelectorAll(".segments").forEach(e=>{
+    e.innerHTML = all;
+});
+let ids = ["fragsBg","fragsFg"];
+let inxId = 0;
+spiral.querySelectorAll(".frags").forEach(e=>{
+    e.id = ids[inxId++];
+});
+const segmentsFg = spiral.querySelector("#fragsFg");
+const segmentsBg = spiral.querySelector("#fragsBg");
 
 let cc = 0;
-[...segments.children].forEach((e) => {
+[...segmentsFg.children].forEach((e) => {
     e.setAttribute("data-value", cc);
     e.setAttribute("id", `s${cc++}`);
+    e.setAttribute("class", `seg`);
+    e.setAttribute("stroke", "transparent");
+});
+cc = 0;
+[...segmentsBg.children].forEach((e) => {
+    e.setAttribute("id", `sb${cc++}`);
     e.setAttribute("class", `seg`);
     e.setAttribute("fill", "lightgreen");
     e.setAttribute("stroke", "transparent");
 });
 
 // using fragments coloring
-[...segments.children].forEach((elem) => {
+[...segmentsFg.children].forEach((elem) => {
     elem.addEventListener("mousedown", (e) => {
         clicked = true;
         let temp = Number(e.target.getAttribute("data-value"));
         if (start == -1 || temp >= startEnd[1] || temp < startEnd[0]) {
             start = temp;
             currClick = null;
-            e.target.setAttribute("fill-opacity", 1);
             for (let i = 0; i < 96; i++) {
-                const elemI = segments.querySelector("#s" + i);
+                const elemI = segmentsBg.querySelector("#sb" + i);
                 elemI.setAttribute("fill-opacity", 0);
             }
+            const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+            elemI.setAttribute("fill-opacity", 1);
         } else {
             currClick = temp;
         }
@@ -127,7 +146,7 @@ let cc = 0;
         clicked = false;
     });
 });
-segments.addEventListener("mouseleave", (e) => {
+segmentsFg.addEventListener("mouseleave", (e) => {
     clicked = false;
 });
 
@@ -141,14 +160,14 @@ const fillSegs = (e) => {
             currClick = end;
             startEnd = [start, startEnd[1] + diff];
             for (let i = 0; i < 96; i++) {
-                const elemI = segments.querySelector("#s" + i);
+                const elemI = segmentsBg.querySelector("#sb" + i);
                 elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
             }
         }
     } else {
         startEnd = [start, end].sort((a, b) => a - b);
         for (let i = 0; i < 96; i++) {
-            const elemI = segments.querySelector("#s" + i);
+            const elemI = segmentsBg.querySelector("#sb" + i);
             elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
         }
     }
