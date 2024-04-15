@@ -97,6 +97,7 @@ let cc = 0;
     e.setAttribute("id", `s${cc++}`);
     e.setAttribute("class", `seg`);
     e.setAttribute("fill", "lightgreen");
+    e.setAttribute("stroke", "transparent");
 });
 
 // using fragments coloring
