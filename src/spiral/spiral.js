@@ -33,7 +33,7 @@ for (let i = 0; i < 9; i++) {
             : `-10 0 ${i == 8 ? form + 20 : form * 2 + 20} ${form + 10}`
     }" style="top:${yy}px;left:${xx - (size * i) / 2 - size / 2 - dd}px;width:${
         i == 8 ? form + 20 : form * 2 + 20
-    }px;height:${form + 10}px;z-index:${10 - i};">`;
+    }px;height:${form + 10}px;z-index:${20 - i};">`;
     // elem += `<circle r="${form / 2}" cx="${
     //     form + 2
     // }" cy="0" stroke="white" fill="transparent" stroke-width="${form}" />`;
@@ -92,12 +92,12 @@ let start = -1;
 let currClick;
 let clicked = false;
 
-spiral.querySelectorAll(".segments").forEach(e=>{
+spiral.querySelectorAll(".segments").forEach((e) => {
     e.innerHTML = all;
 });
-let ids = ["fragsBg","fragsFg"];
+let ids = ["fragsBg", "fragsFg"];
 let inxId = 0;
-spiral.querySelectorAll(".frags").forEach(e=>{
+spiral.querySelectorAll(".frags").forEach((e) => {
     e.id = ids[inxId++];
 });
 const segmentsFg = spiral.querySelector("#fragsFg");
@@ -123,7 +123,7 @@ cc = 0;
     elem.addEventListener("mousedown", (e) => {
         clicked = true;
         let temp = Number(e.target.getAttribute("data-value"));
-        if (start == -1 || temp >= startEnd[1] || temp < startEnd[0]) {
+        if (start == -1 || temp > startEnd[1] || temp < startEnd[0]) {
             start = temp;
             currClick = null;
             for (let i = 0; i < 96; i++) {
@@ -132,6 +132,12 @@ cc = 0;
             }
             const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
             elemI.setAttribute("fill-opacity", 1);
+        } else if (temp == startEnd[1]) {
+            // move end
+            start = startEnd[0];
+        } else if (temp == startEnd[0]) {
+            // move start
+            start = startEnd[1];
         } else {
             currClick = temp;
         }
@@ -144,6 +150,7 @@ cc = 0;
     });
     elem.addEventListener("mouseup", (e) => {
         clicked = false;
+        currClick = null;
     });
 });
 segmentsFg.addEventListener("mouseleave", (e) => {

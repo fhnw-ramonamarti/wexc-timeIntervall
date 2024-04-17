@@ -36,6 +36,7 @@
 /* -------------- */
 #spiralTime .hour {
     position: absolute;
+    z-index: 90;
     color: gray;
     /* background-color: white; */
     border-radius: 50%;
