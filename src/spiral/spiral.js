@@ -84,6 +84,13 @@ for (let i = 0; i <= 24; i++) {
 }
 
 // segments
+let blockedTime = [5.25, 6.5].map((e) => e * 4);
+let blocked = [...Array(blockedTime[1] - blockedTime[0] + 1).keys()].map((e) => e + blockedTime[0]);
+let disabledTime = [0, 2, 22, 24].map((e) => e * 4);
+let disabled = [
+    ...[...Array(disabledTime[1] - disabledTime[0] + 1).keys()].map((e) => e + disabledTime[0]),
+    ...[...Array(disabledTime[3] - disabledTime[2] + 1).keys()].map((e) => e + disabledTime[2]),
+];
 let startEnd = [-1, -1];
 let start = -1;
 let currClick;
@@ -114,6 +121,12 @@ let cc = 0;
         e.setAttribute("id", `s${cc++}`);
         e.setAttribute("class", `seg`);
         e.setAttribute("stroke", "transparent");
+        if (blocked.includes(cc)) {
+            e.classList.add("reserved");
+        }
+        if (disabled.includes(cc)) {
+            e.classList.add("disabled");
+        }
     });
 cc = 0;
 [...segmentsBg.children]
@@ -123,6 +136,12 @@ cc = 0;
         e.setAttribute("class", `seg`);
         e.setAttribute("fill-opacity", "1");
         e.setAttribute("stroke", "transparent");
+        if (blocked.includes(cc)) {
+            e.classList.add("reserved");
+        }
+        if (disabled.includes(cc)) {
+            e.classList.add("disabled");
+        }
     });
 cc = 0;
 [...handlesBg.children]
@@ -130,112 +149,122 @@ cc = 0;
     .forEach((e) => {
         e.setAttribute("id", `sh${cc++}`);
         e.setAttribute("class", `hand hidden`);
+        if (blocked.includes(cc)) {
+            e.classList.add("reserved");
+        }
+        if (disabled.includes(cc)) {
+            e.classList.add("disabled");
+        }
     });
 
 // using fragments coloring
 [...segmentsFg.children]
     .filter((e) => e.nodeName == "path")
     .forEach((elem) => {
-        elem.addEventListener("mousedown", (e) => {
-            clicked = true;
-            let temp = Number(e.target.getAttribute("data-value"));
-            if (start == -1 || temp > startEnd[1] || temp < startEnd[0]) {
-                start = temp;
-                currClick = null;
-                for (let i = 0; i < 96; i++) {
-                    const elemI = segmentsBg.querySelector("#sb" + i);
-                    elemI.classList.remove("selected");
-                    elemI.classList.remove("clicked");
-                    const elemI2 = handlesBg.querySelector("#sh" + i);
-                    elemI2.classList.add("hidden");
-                    elemI2.classList.remove("clicked");
-                }
-                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
-                elemI.classList.add("selected");
-                elemI.classList.add("clicked");
-                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-                elemI2.classList.add("clicked");
-                elemI2.classList.remove("hidden");
-            } else if (temp == startEnd[1]) {
-                // move end
-                start = startEnd[0];
-                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
-                elemI.classList.add("clicked");
-                elemI.classList.add("active");
-                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-                elemI2.classList.add("clicked");
-                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
-                    const elemI = segmentsBg.querySelector("#sb" + i);
-                    elemI.classList.add("clicked");
-                }
-            } else if (temp == startEnd[0]) {
-                // move start
-                start = startEnd[1];
-                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
-                elemI.classList.add("clicked");
-                elemI.classList.add("active");
-                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-                elemI2.classList.add("clicked");
-                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
-                    const elemI = segmentsBg.querySelector("#sb" + i);
-                    elemI.classList.add("clicked");
-                }
-            } else {
-                // add class for draging
-                for (let i = 0; i < 96; i++) {
-                    const elemI = segmentsBg.querySelector("#sb" + i);
-                    if (startEnd[0] <= i && startEnd[1] >= i) {
-                        elemI.classList.add("clicked");
-                    } else {
+        if (!elem.classList.contains("reserved") && !elem.classList.contains("disabled")) {
+            elem.addEventListener("mousedown", (e) => {
+                clicked = true;
+                let temp = Number(e.target.getAttribute("data-value"));
+                if (start == -1 || temp > startEnd[1] || temp < startEnd[0]) {
+                    start = temp;
+                    currClick = null;
+                    for (let i = 0; i < 96; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        elemI.classList.remove("selected");
                         elemI.classList.remove("clicked");
+                        const elemI2 = handlesBg.querySelector("#sh" + i);
+                        elemI2.classList.add("hidden");
+                        elemI2.classList.remove("clicked");
+                    }
+                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    elemI.classList.add("selected");
+                    elemI.classList.add("clicked");
+                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    elemI2.classList.add("clicked");
+                    elemI2.classList.remove("hidden");
+                } else if (temp == startEnd[1]) {
+                    // move end
+                    start = startEnd[0];
+                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    elemI.classList.add("clicked");
+                    elemI.classList.add("active");
+                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    elemI2.classList.add("clicked");
+                    for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        elemI.classList.add("clicked");
+                    }
+                } else if (temp == startEnd[0]) {
+                    // move start
+                    start = startEnd[1];
+                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    elemI.classList.add("clicked");
+                    elemI.classList.add("active");
+                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    elemI2.classList.add("clicked");
+                    for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        elemI.classList.add("clicked");
+                    }
+                } else {
+                    // add class for draging
+                    for (let i = 0; i < 96; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        if (startEnd[0] <= i && startEnd[1] >= i) {
+                            elemI.classList.add("clicked");
+                        } else {
+                            elemI.classList.remove("clicked");
+                        }
+                    }
+                    currClick = temp;
+                }
+            });
+            elem.addEventListener("mouseenter", (e) => {
+                if (clicked) {
+                    fillSegs(e.target);
+                }
+                const val = e.target.getAttribute("data-value");
+                if (startEnd[1] != -1 && startEnd[0] <= val && startEnd[1] >= val) {
+                    for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        elemI.classList.add("hover");
+                        if (i == startEnd[0]) {
+                            elemI.classList.add("first");
+                        }
+                        if (i == startEnd[1]) {
+                            elemI.classList.add("last");
+                        }
                     }
                 }
-                currClick = temp;
-            }
-        });
-        elem.addEventListener("mouseenter", (e) => {
-            if (clicked) {
-                fillSegs(e.target);
-            }
-            const val = e.target.getAttribute("data-value");
-            if (startEnd[1] != -1 && startEnd[0] <= val && startEnd[1] >= val) {
-                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+            });
+            elem.addEventListener("mouseleave", (e) => {
+                if (clicked) {
+                    handlesBg
+                        .querySelector("#sh" + e.target.id[(1, e.target.id.length - 1)])
+                        .classList.remove("clicked");
+                }
+                for (let i = startEnd[0]; i <= startEnd[1] && i != -1; i++) {
                     const elemI = segmentsBg.querySelector("#sb" + i);
-                    elemI.classList.add("hover");
+                    elemI.classList.remove("hover");
                     if (i == startEnd[0]) {
-                        elemI.classList.add("first");
+                        elemI.classList.remove("first");
                     }
                     if (i == startEnd[1]) {
-                        elemI.classList.add("last");
+                        elemI.classList.remove("last");
                     }
                 }
-            }
-        });
-        elem.addEventListener("mouseleave", (e) => {
-            if (clicked) {
-                handlesBg.querySelector("#sh" + e.target.id[(1, e.target.id.length - 1)]).classList.remove("clicked");
-            }
-            for (let i = startEnd[0]; i <= startEnd[1] && i != -1; i++) {
-                const elemI = segmentsBg.querySelector("#sb" + i);
-                elemI.classList.remove("hover");
-                if (i == startEnd[0]) {
-                    elemI.classList.remove("first");
+            });
+            elem.addEventListener("mouseup", (e) => {
+                clicked = false;
+                currClick = null;
+                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    elemI.classList.remove("clicked");
                 }
-                if (i == startEnd[1]) {
-                    elemI.classList.remove("last");
-                }
-            }
-        });
-        elem.addEventListener("mouseup", (e) => {
-            clicked = false;
-            currClick = null;
-            for (let i = startEnd[0]; i <= startEnd[1]; i++) {
-                const elemI = segmentsBg.querySelector("#sb" + i);
-                elemI.classList.remove("clicked");
-            }
-            handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
-            handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
-        });
+                handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
+                handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
+            });
+        }
     });
 segmentsFg.addEventListener("mouseleave", (e) => {
     clicked = false;

@@ -57,24 +57,24 @@
 }
 
 /* svg styles */
-.disabled {
+svg .seg.disabled {
     fill: var(--disabled-color) !important;
 }
-.reserved {
+svg .seg.reserved {
     fill: var(--secondary-color) !important;
 }
 .selected {
-    fill: var(--primary-color) !important;
+    fill: var(--primary-color);
 }
 .selected.hover:not(.clicked) {
-    fill: var(--primary-light-color) !important;
+    fill: var(--primary-light-color);
 }
 .selected.clicked.active.first ,
 .selected.clicked.active.last {
     filter: url(#shadows);
 }
 .hand {
-    fill: var(--dark-color) !important;
+    fill: var(--dark-color);
     filter: url(#shadow);
 }
 
