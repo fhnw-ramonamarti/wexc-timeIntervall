@@ -2,6 +2,9 @@ export { allMore, all, allHandles };
 
 const allHandles = `
 <svg width="390" height="390" viewBox="0 0 390 390" id="hands" class="hands" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><filter id="shadow">
+    <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="white" />
+</filter></defs>
 <path d="M193.642 190.508L193.095 188.584L195.018 188.037L195.566 189.961L193.642 190.508ZM192.547 186.661L192 184.737L193.924 184.19L194.471 186.113L192.547 186.661ZM197.49 189.413L196.942 187.489L198.866 186.942L199.413 188.866L197.49 189.413ZM196.395 185.566L195.847 183.642L197.771 183.095L198.318 185.018L196.395 185.566ZM201.337 188.318L200.789 186.395L202.713 185.847L203.26 187.771L201.337 188.318ZM200.242 184.471L199.694 182.547L201.618 182L202.166 183.924L200.242 184.471Z"           fill="black"/>
 <path d="M199.204 202.025L199.192 200.025L201.192 200.011L201.204 202.012L199.204 202.025ZM199.178 198.024L199.166 196.024L201.166 196.012L201.179 198.012L199.178 198.024ZM203.205 201.999L203.191 199.999L205.192 199.986L205.205 201.986L203.205 201.999ZM203.179 197.999L203.166 195.998L205.166 195.986L205.179 197.987L203.179 197.999ZM207.204 201.974L207.192 199.973L209.191 199.96L209.205 201.96L207.204 201.974ZM207.179 197.973L207.166 195.973L209.166 195.96L209.179 197.961L207.179 197.973Z"  fill="black"/>
 <path d="M192 211.871L193.168 210.247L194.792 211.415L193.624 213.039L192 211.871ZM194.336 208.624L195.504 207L197.128 208.168L195.96 209.792L194.336 208.624ZM195.247 214.207L196.415 212.583L198.039 213.751L196.871 215.375L195.247 214.207ZM197.583 210.96L198.751 209.336L200.375 210.504L199.207 212.128L197.583 210.96ZM198.494 216.543L199.662 214.919L201.286 216.087L200.118 217.711L198.494 216.543ZM200.83 213.296L201.998 211.672L203.622 212.84L202.454 214.464L200.83 213.296Z"                 fill="black"/>
@@ -102,6 +105,18 @@ const allHandles = `
 `;
 const all = `
 <svg width="390" height="390" viewBox="0 0 390 390" id="frags" class="frags" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs><filter id="shadows">
+    <feOffset dx='0' dy='0' />
+    <!-- Shadow blur -->
+    <feGaussianBlur stdDeviation='3' result='offset-blur' />
+    <!-- Invert drop shadow to make an inset shadow-->
+    <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
+    <!-- Cut colour inside shadow -->
+    <feFlood flood-color='black' flood-opacity='.95' result='color' />
+    <feComposite operator='in' in='color' in2='inverse' result='shadow' />
+    <!-- Placing shadow over element -->
+    <feComposite operator='over' in='shadow' in2='SourceGraphic' />
+</filter></defs>
 <path d="M181 197C183.5 174 211.5 172 218 188.5L181 197Z"                                                                                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M218 188.5L181 197L216 214C220.382 204.19 221.088 198.618 218 188.5Z"                                                                 fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M216 214L181 197L198 231.5C206.214 227.394 210.224 223.703 216 214Z"                                                                  fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
@@ -202,6 +217,9 @@ const all = `
 `;
 const allMore = `
 <svg width="360" height="360" viewBox="0 0 360 360" id="frags" class="frags" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><filter id="shadow">
+    <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="black" />
+</filter></defs>
 <path d="M181.701 192.484L173.471 189.579C173.799 184.674 175.49 180.111 178.257 176.391C181.055 172.427 184.872 169.455 189.222 167.847C193.573 166.24 199.689 166.008 204.131 167.489C206.281 168.206 209.01 169.569 211.511 171.314C213.924 172.996 216.103 175.018 217.353 177.133L181.701 192.484Z" fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>
 <path d="M221.46 191.27L221.46 191.27L221.461 191.275C221.708 193.99 221.338 196.962 220.778 199.511C220.253 201.903 219.565 203.902 219.08 204.946L181.919 192.722L217.611 177.565C218.833 179.525 219.663 181.213 220.251 183.234C220.858 185.322 221.211 187.776 221.46 191.27Z"                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>
 <path d="M213.506 215.607C211.057 219.036 208.609 221.498 203.752 224.917L173.993 190.28L218.858 205.397C218.308 206.509 217.835 207.539 217.383 208.522C216.247 210.993 215.246 213.171 213.506 215.607Z"                                                                                               fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5"/>

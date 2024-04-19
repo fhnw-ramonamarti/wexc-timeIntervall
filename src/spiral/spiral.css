@@ -1,7 +1,21 @@
+:root {
+    --primary-color: #90bdb5ff;
+    --primary-light-color: #bdd4d0ff;
+    --primary-dark-color: #90bdb5ff;
+    --secondary-color: #cc98c7ff;
+    --disabled-color: #909abdff;
+    --dark-color: #3d4b48ff;
+    --light-color: #ffffffff;
+
+    --shadow-light: 0 0 5px 5px var(--light-color);
+    --shadow-dark: 0 0 5px 5px var(--dark-color);
+}
+
 #spiralTime {
     position: relative;
     width: 510px;
     height: 510px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 /* ------------- */
 #spiralTime #segmentsFg {
@@ -27,6 +41,10 @@
     margin-left: 25px;
 }
 
+#fragsBg {
+    background-color: var(--light-color);
+}
+
 #spiralTime #circles svg {
     position: absolute;
 }
@@ -37,29 +55,37 @@
 .hidden {
     display: none;
 }
-.selected.clicked {
-    fill: green !important;
-}
 
-#fragsFg::after {
-    /* todo */
-    content: url("./Vector.svg");
-    position: absolute;
-    left: 10rem;
-    top: 4rem;
-    z-index: 10000000;
-    /* fill: url("./Vector.svg") !important; */
-    /* fill-opacity: 1; */
+/* svg styles */
+.disabled {
+    fill: var(--disabled-color) !important;
+}
+.reserved {
+    fill: var(--secondary-color) !important;
+}
+.selected {
+    fill: var(--primary-color) !important;
+}
+.selected.hover:not(.clicked) {
+    fill: var(--primary-light-color) !important;
+}
+.selected.clicked.active.first ,
+.selected.clicked.active.last {
+    filter: url(#shadows);
+}
+.hand {
+    fill: var(--dark-color) !important;
+    filter: url(#shadow);
 }
 
 /* -------------- */
 #spiralTime .hour {
     position: absolute;
     z-index: 90;
-    color: gray;
+    color: var(--dark-color);
     border-radius: 50%;
     padding: 2px;
-    /* display: none; */
+    display: none;
 }
 
 /* -----outside----- */

@@ -1,5 +1,8 @@
 <svg width="390" height="390" viewBox="0 0 390 390" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M181 197C183.5 174 211.5 172 218 188.5L181 197Z"                                                                                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
+<defs><filter id="shadow">
+    <feComposite operator='over' in='shadow' in2='SourceGraphic' />
+</filter></defs>
+<path style="filter: url(#shadow);" d="M181 197C183.5 174 211.5 172 218 188.5L181 197Z"                                                                                      fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M218 188.5L181 197L216 214C220.382 204.19 221.088 198.618 218 188.5Z"                                                                 fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M216 214L181 197L198 231.5C206.214 227.394 210.224 223.703 216 214Z"                                                                  fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />
 <path d="M198 231.5C188.911 235.513 183.458 236.358 173 235L181 197Z"                                                                          fill="transparent" fill-opacity="0" stroke="black" stroke-opacity="0.1" stroke-width="0.5" />

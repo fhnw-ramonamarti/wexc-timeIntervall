@@ -107,89 +107,136 @@ const segmentsFg = spiral.querySelector("#fragsFg");
 const segmentsBg = spiral.querySelector("#fragsBg");
 
 let cc = 0;
-[...segmentsFg.children].forEach((e) => {
-    e.setAttribute("data-value", cc);
-    e.setAttribute("id", `s${cc++}`);
-    e.setAttribute("class", `seg`);
-    e.setAttribute("stroke", "transparent");
-});
+[...segmentsFg.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((e) => {
+        e.setAttribute("data-value", cc);
+        e.setAttribute("id", `s${cc++}`);
+        e.setAttribute("class", `seg`);
+        e.setAttribute("stroke", "transparent");
+    });
 cc = 0;
-[...segmentsBg.children].forEach((e) => {
-    e.setAttribute("id", `sb${cc++}`);
-    e.setAttribute("class", `seg`);
-    e.setAttribute("fill", "lightgreen");
-    e.setAttribute("stroke", "transparent");
-});
+[...segmentsBg.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((e) => {
+        e.setAttribute("id", `sb${cc++}`);
+        e.setAttribute("class", `seg`);
+        e.setAttribute("fill-opacity", "1");
+        e.setAttribute("stroke", "transparent");
+    });
 cc = 0;
-[...handlesBg.children].forEach((e) => {
-    e.setAttribute("id", `sh${cc++}`);
-    e.setAttribute("class", `hand hidden`);
-});
+[...handlesBg.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((e) => {
+        e.setAttribute("id", `sh${cc++}`);
+        e.setAttribute("class", `hand hidden`);
+    });
 
 // using fragments coloring
-[...segmentsFg.children].forEach((elem) => {
-    elem.addEventListener("mousedown", (e) => {
-        clicked = true;
-        let temp = Number(e.target.getAttribute("data-value"));
-        if (start == -1 || temp > startEnd[1] || temp < startEnd[0]) {
-            start = temp;
-            currClick = null;
-            for (let i = 0; i < 96; i++) {
-                const elemI = segmentsBg.querySelector("#sb" + i);
-                elemI.setAttribute("fill-opacity", 0);
-                elemI.classList.remove("selected");
-                elemI.classList.remove("clicked");
-                const elemI2 = handlesBg.querySelector("#sh" + i);
-                elemI2.classList.add("hidden");
-                elemI2.classList.remove("clicked");
-            }
-            const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
-            elemI.setAttribute("fill-opacity", 1);
-            elemI.classList.add("selected");
-            const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-            elemI2.classList.add("clicked");
-            elemI2.classList.remove("hidden");
-            // color change on drag
-            // add class for selected
-        } else if (temp == startEnd[1]) {
-            // move end
-            start = startEnd[0];
-            const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-            elemI2.classList.add("clicked");
-        } else if (temp == startEnd[0]) {
-            // move start
-            start = startEnd[1];
-            const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
-            elemI2.classList.add("clicked");
-        } else {
-            // add class for draging
-            for (let i = 0; i < 96; i++) {
-                const elemI = segmentsBg.querySelector("#sb" + i);
-                if (startEnd[0] <= i && startEnd[1] >= i) {
-                    elemI.classList.add("clicked");
-                } else {
+[...segmentsFg.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((elem) => {
+        elem.addEventListener("mousedown", (e) => {
+            clicked = true;
+            let temp = Number(e.target.getAttribute("data-value"));
+            if (start == -1 || temp > startEnd[1] || temp < startEnd[0]) {
+                start = temp;
+                currClick = null;
+                for (let i = 0; i < 96; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    elemI.classList.remove("selected");
                     elemI.classList.remove("clicked");
+                    const elemI2 = handlesBg.querySelector("#sh" + i);
+                    elemI2.classList.add("hidden");
+                    elemI2.classList.remove("clicked");
+                }
+                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                elemI.classList.add("selected");
+                elemI.classList.add("clicked");
+                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                elemI2.classList.add("clicked");
+                elemI2.classList.remove("hidden");
+            } else if (temp == startEnd[1]) {
+                // move end
+                start = startEnd[0];
+                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                elemI.classList.add("clicked");
+                elemI.classList.add("active");
+                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                elemI2.classList.add("clicked");
+                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    elemI.classList.add("clicked");
+                }
+            } else if (temp == startEnd[0]) {
+                // move start
+                start = startEnd[1];
+                const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                elemI.classList.add("clicked");
+                elemI.classList.add("active");
+                const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                elemI2.classList.add("clicked");
+                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    elemI.classList.add("clicked");
+                }
+            } else {
+                // add class for draging
+                for (let i = 0; i < 96; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    if (startEnd[0] <= i && startEnd[1] >= i) {
+                        elemI.classList.add("clicked");
+                    } else {
+                        elemI.classList.remove("clicked");
+                    }
+                }
+                currClick = temp;
+            }
+        });
+        elem.addEventListener("mouseenter", (e) => {
+            if (clicked) {
+                fillSegs(e.target);
+            }
+            const val = e.target.getAttribute("data-value");
+            if (startEnd[1] != -1 && startEnd[0] <= val && startEnd[1] >= val) {
+                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                    const elemI = segmentsBg.querySelector("#sb" + i);
+                    elemI.classList.add("hover");
+                    if (i == startEnd[0]) {
+                        elemI.classList.add("first");
+                    }
+                    if (i == startEnd[1]) {
+                        elemI.classList.add("last");
+                    }
                 }
             }
-            currClick = temp;
-        }
+        });
+        elem.addEventListener("mouseleave", (e) => {
+            if (clicked) {
+                handlesBg.querySelector("#sh" + e.target.id[(1, e.target.id.length - 1)]).classList.remove("clicked");
+            }
+            for (let i = startEnd[0]; i <= startEnd[1] && i != -1; i++) {
+                const elemI = segmentsBg.querySelector("#sb" + i);
+                elemI.classList.remove("hover");
+                if (i == startEnd[0]) {
+                    elemI.classList.remove("first");
+                }
+                if (i == startEnd[1]) {
+                    elemI.classList.remove("last");
+                }
+            }
+        });
+        elem.addEventListener("mouseup", (e) => {
+            clicked = false;
+            currClick = null;
+            for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                const elemI = segmentsBg.querySelector("#sb" + i);
+                elemI.classList.remove("clicked");
+            }
+            handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
+            handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
+        });
     });
-    elem.addEventListener("mouseenter", (e) => {
-        if (clicked) {
-            fillSegs(e.target);
-        }
-    });
-    elem.addEventListener("mouseup", (e) => {
-        clicked = false;
-        currClick = null;
-        for (let i = startEnd[0]; i <= startEnd[1]; i++) {
-            const elemI = segmentsBg.querySelector("#sb" + i);
-            elemI.classList.remove("clicked");
-        }
-        handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
-        handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
-    });
-});
 segmentsFg.addEventListener("mouseleave", (e) => {
     clicked = false;
     currClick = null;
@@ -210,7 +257,6 @@ const fillSegs = (e) => {
             handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
             for (let i = 0; i < 96; i++) {
                 const elemI = segmentsBg.querySelector("#sb" + i);
-                elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
                 if (startEnd[0] <= i && startEnd[1] >= i) {
                     elemI.classList.add("selected");
                     elemI.classList.add("clicked");
@@ -225,22 +271,26 @@ const fillSegs = (e) => {
             handlesBg.querySelector("#sh" + startEnd[1]).classList.add("hidden");
             handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
             handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
+            segmentsBg.querySelector("#sb" + startEnd[0]).classList.remove("active");
+            segmentsBg.querySelector("#sb" + startEnd[1]).classList.remove("active");
         }
         startEnd = [start, end].sort((a, b) => a - b);
         if (startEnd[0] != -1 && startEnd[1] != -1) {
             handlesBg.querySelector("#sh" + end).classList.add("clicked");
+            segmentsBg.querySelector("#sb" + end).classList.add("active");
             handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("hidden");
             handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
         }
         for (let i = 0; i < 96; i++) {
             const elemI = segmentsBg.querySelector("#sb" + i);
-            elemI.setAttribute("fill-opacity", startEnd[0] <= i && startEnd[1] >= i ? 1 : 0);
-            elemI.classList.remove("clicked");
             if (startEnd[0] <= i && startEnd[1] >= i) {
                 elemI.classList.add("selected");
+                elemI.classList.add("clicked");
             } else {
                 elemI.classList.remove("selected");
+                elemI.classList.remove("clicked");
             }
         }
+        segmentsBg.querySelector("#sb" + end).classList.add("clicked");
     }
 };
