@@ -19,12 +19,31 @@
     height: var(--size);
     font-family: Arial, Helvetica, sans-serif;
     /* scale: 0.8; */
+
+    > div {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
 }
 
+#fragsBg {
+    background-color: var(--light-color);
+    border-radius: 5px;
+}
 /* ------------- */
 #spiralTime #segmentsFg {
     z-index: 101;
 }
+#spiralTime #numbs {
+    z-index: 95;
+}
+#circles {
+    z-index: 90;
+}
+
+#spiralTime .circles,
+#spiralTime .numbers,
 #spiralTime .handles,
 #spiralTime .segments {
     position: absolute;
@@ -32,49 +51,45 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: var(--size);
-    height: var(--size);
+    /* width: var(--size);
+    height: var(--size); */
 }
 
 /* for line frags */
 #spiralTime .hands,
 #spiralTime .frags {
     display: inline;
-    scale: 1.05;
-    margin-top: -25px;
-    margin-left: -10px;
+    /* scale: 1.05; */
+    /* margin-top: -25px;
+    margin-left: -10px; */
 }
 
-#fragsBg {
-    background-color: var(--light-color);
-}
-
-#spiralTime #circles svg {
-    position: absolute;
-}
-
-.lll {
+/* .lll {
     transform: translate(0%, -100%);
-}
+} */
 .hidden {
     display: none;
 }
 
 /* svg styles */
-svg .seg.disabled {
+
+#segmentsBg#segmentsBg .seg.disabled {
     fill: var(--disabled-color) !important;
 }
-svg .seg.reserved {
+#segmentsBg#segmentsBg .seg.reserved {
     fill: var(--secondary-color) !important;
 }
-.selected {
-    fill: var(--primary-color);
+#segmentsBg .seg {
+    fill: var(--light-color) !important;
 }
-.selected.hover:not(.clicked) {
-    fill: var(--primary-light-color);
+#segmentsBg .seg.selected {
+    fill: var(--primary-color) !important;
 }
-.selected.clicked.active.first ,
-.selected.clicked.active.last {
+#segmentsBg .selected.hover:not(.clicked) {
+    fill: var(--primary-light-color) !important;
+}
+#segmentsBg .selected.clicked.active.first,
+#segmentsBg .selected.clicked.active.last {
     filter: url(#shadows);
 }
 .hand {
@@ -91,7 +106,7 @@ svg .seg.reserved {
     label {
         display: inline-flex;
         flex-direction: column;
-        gap: .2rem;
+        gap: 0.2rem;
         font-size: 1rem;
     }
 
@@ -102,7 +117,7 @@ svg .seg.reserved {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: .2rem .5rem;
+        padding: 0.2rem 0.5rem;
         font-size: 1rem;
     }
 }
@@ -111,29 +126,29 @@ svg .seg.reserved {
     top: 10px;
     left: 10px;
 }
-#end{
+#end {
     position: absolute;
     top: 10px;
     right: 10px;
 }
-#dur{
+#dur {
     position: absolute;
     left: 10px;
     bottom: 10px;
 }
 
 /* -------------- */
-#spiralTime .hour {
+/* #spiralTime .hour {
     position: absolute;
     z-index: 90;
     color: var(--dark-color);
     border-radius: 50%;
     padding: 2px;
     display: none;
-}
+} */
 
 /* -----outside----- */
-#spiralTime #h0 {
+/* #spiralTime #h0 {
     left: 230px;
     top: 250px;
 }
@@ -232,10 +247,10 @@ svg .seg.reserved {
 #spiralTime #h24 {
     left: 270px;
     top: 15px;
-}
+} */
 
 /* -----inside----- */
-#spiralTime #hi0 {
+/* #spiralTime #hi0 {
     left: 265px;
     top: 245px;
 }
@@ -334,4 +349,4 @@ svg .seg.reserved {
 #spiralTime #hi24 {
     left: 270px;
     top: 50px;
-}
+} */
