@@ -9,14 +9,18 @@
 
     --shadow-light: 0 0 5px 5px var(--light-color);
     --shadow-dark: 0 0 5px 5px var(--dark-color);
+
+    --size: 480px;
 }
 
 #spiralTime {
     position: relative;
-    width: 510px;
-    height: 510px;
+    width: var(--size);
+    height: var(--size);
     font-family: Arial, Helvetica, sans-serif;
+    /* scale: 0.8; */
 }
+
 /* ------------- */
 #spiralTime #segmentsFg {
     z-index: 101;
@@ -28,17 +32,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 490px;
-    height: 490px;
+    width: var(--size);
+    height: var(--size);
 }
 
 /* for line frags */
 #spiralTime .hands,
 #spiralTime .frags {
     display: inline;
-    scale: 1.3;
-    margin-top: 20px;
-    margin-left: 25px;
+    scale: 1.05;
+    margin-top: -25px;
+    margin-left: -10px;
 }
 
 #fragsBg {
@@ -76,6 +80,46 @@ svg .seg.reserved {
 .hand {
     fill: var(--dark-color);
     filter: url(#shadow);
+}
+
+/* ----- */
+.inputs {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    label {
+        display: inline-flex;
+        flex-direction: column;
+        gap: .2rem;
+        font-size: 1rem;
+    }
+
+    input {
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid var(--dark-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .2rem .5rem;
+        font-size: 1rem;
+    }
+}
+#start {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+#end{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#dur{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
 }
 
 /* -------------- */

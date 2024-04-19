@@ -3,9 +3,9 @@ import { all, allHandles } from "./svgs.js";
 const spiral = document.querySelector("#spiralTime");
 
 // circle spiral
-const yy = 268;
-let xx = 238;
-let size = 25;
+const size = 25;
+const yy = spiral.clientHeight / 2;
+let xx = spiral.clientWidth / 2 - size;
 let elem = "";
 let dd = 0;
 let pathLength = 0;
@@ -102,6 +102,10 @@ spiral.querySelectorAll(".segments").forEach((e) => {
 spiral.querySelectorAll(".handles").forEach((e) => {
     e.innerHTML = allHandles;
 });
+spiral.querySelectorAll(".segments svg, .handles svg").forEach((e) => {
+    e.setAttribute("width", spiral.clientWidth);
+    e.setAttribute("height", spiral.clientHeight);
+});
 let ids = ["fragsBg", "fragsFg", "handsBg"];
 let inxId = 0;
 spiral.querySelectorAll(".frags").forEach((e) => {
@@ -120,7 +124,7 @@ let cc = 0;
         e.setAttribute("data-value", cc);
         e.setAttribute("id", `s${cc++}`);
         e.setAttribute("class", `seg`);
-        e.setAttribute("stroke", "transparent");
+        // e.setAttribute("stroke", "transparent");
         if (blocked.includes(cc)) {
             e.classList.add("reserved");
         }
