@@ -112,6 +112,9 @@ let inxId = 0;
         e.setAttribute("height", spiral.clientHeight);
         e.id = ids[inxId++];
     });
+spiral.querySelectorAll(".inputs input").forEach((e) => {
+    e.step = "900";
+});
 
 const handlesBg = spiral.querySelector("#handsBg");
 const segmentsFg = spiral.querySelector("#fragsFg");
@@ -269,12 +272,14 @@ cc = 0;
             elem.addEventListener("mouseup", (e) => {
                 clicked = false;
                 currClick = null;
-                for (let i = startEnd[0]; i <= startEnd[1]; i++) {
-                    const elemI = segmentsBg.querySelector("#sb" + i);
-                    elemI.classList.remove("clicked");
+                if (startEnd[1] != -1) {
+                    for (let i = startEnd[0]; i <= startEnd[1]; i++) {
+                        const elemI = segmentsBg.querySelector("#sb" + i);
+                        elemI.classList.remove("clicked");
+                    }
+                    handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
+                    handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
                 }
-                handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
-                handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
             });
         }
     });
@@ -284,8 +289,8 @@ segmentsFg.addEventListener("mouseleave", (e) => {
 });
 
 // using fragments coloring
-const fillSegs = (e) => {
-    const end = Number(e.getAttribute("data-value"));
+const fillSegs = (e, input) => {
+    const end = Number(e?.getAttribute("data-value") ?? input);
     if (currClick) {
         const diff = end - currClick;
         if (startEnd[0] + diff >= 0 && startEnd[1] + diff < 96) {
@@ -354,7 +359,42 @@ const fillSegs = (e) => {
     }
 };
 
+spiral.querySelectorAll(".inputs input").forEach((e) => {
+    e.oninput = (e) => {
+        const val = Math.floor((Number(e.target.value.split(":")[0]) + Number(e.target.value.split(":")[1]) / 60) * 4);
+        if (e.target.name === "duration") {
+            start = start == -1 ? 0 : start;
+            startEnd = [start, start + val];
+            spiral.querySelector("#endIn").value = `${Math.floor(startEnd[1] / 4)}:${
+                ((startEnd[1] / 4) % 1) * 60 ? ((startEnd[1] / 4) % 1) * 60 : "00"
+            }`.format();
+        }
+        if (e.target.name === "start") {
+            start = val;
+            const tmp = startEnd[1] == -1 ? start : startEnd[1];
+            startEnd = [start, tmp];
+            spiral.querySelector("#dur").value = `${Math.floor(startEnd[0] / 4)}:${
+                ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
+            }`.format();
+        }
+        if (e.target.name === "end") {
+            start = start == -1 ? val : start;
+            startEnd = [start, val];
+            spiral.querySelector("#dur").value = `${Math.floor(startEnd[0] / 4)}:${
+                ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
+            }`.format();
+        }
+        if (disabled.includes(val + 1)) {
+            e.target.setCustomValidity("disabled");
+        } else if (blocked.includes(val + 1)) {
+            e.target.setCustomValidity("reserved");
+        } else {
+            e.target.setCustomValidity("");
+            fillSegs(null, val);
+        }
+    };
+});
+
 String.prototype.format = function () {
-    console.log(this);
     return (this.length == 4 ? "0" : "") + String(this);
 };
