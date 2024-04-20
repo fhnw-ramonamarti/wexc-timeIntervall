@@ -2,88 +2,14 @@ import { circles, segments, handels, numbers } from "./svgs.js";
 
 const spiral = document.querySelector("#spiralTime");
 
-// circle spiral
-// const size = 25;
-// const yy = spiral.clientHeight / 2;
-// let xx = spiral.clientWidth / 2 - size;
-// let elem = "";
-// let dd = 0;
-// let pathLength = 0;
-// let circs = [];
-// let circs2 = [];
-// for (let i = 0; i < 9; i++) {
-//     let form = size * i + size;
-//     pathLength += form * Math.PI;
-//     circs.push(pathLength);
-//     circs2.push(i == 8 ? (Math.PI * form) / 2 : Math.PI * form);
-//     if (i % 2 != 0) {
-//         // bottom
-//         xx -= size * i;
-//     } else {
-//         // top
-//         dd = -size / 2;
-//     }
-//     elem += `<svg width=""${
-//         i == 8 ? form / 2 : form + 5
-//     }" height=""${form}" xmlns="http://www.w3.org/2000/svg" id="time${i}" class=" ${
-//         i % 2 == 0 ? "lll" : "rrr"
-//     }"  viewbox=" ${
-//         i % 2 == 0
-//             ? `-10 -${form + 10} ${i == 8 ? form + 20 : form * 2 + 20} ${form + 10}`
-//             : `-10 0 ${i == 8 ? form + 20 : form * 2 + 20} ${form + 10}`
-//     }" style="top:${yy}px;left:${xx - (size * i) / 2 - size / 2 - dd}px;width:${
-//         i == 8 ? form + 20 : form * 2 + 20
-//     }px;height:${form + 10}px;z-index:${20 - i};">`;
-//     elem += `<circle r="${form / 2}" cx="${
-//         form + 2
-//     }" cy="0" stroke="lightgreen" fill="transparent" stroke-width="${form}" stroke-dasharray="0,1" class="mark" id="mark${i}" />`;
-//     elem += `<circle r="${form}" cx="${form + 2}" cy="0" stroke="black" fill="transparent" stroke-width="2" />`;
-//     elem += `<circle r="${form}" cx="${
-//         form + 2
-//     }" cy="0" stroke="gray" fill="transparent" stroke-width="7" class="min" id="m${i}" stroke-dashoffset="0" stroke-dasharray="0,1" />`;
-//     elem += `<circle r="${form}" cx="${
-//         form + 2
-//     }" cy="0" stroke="darkred" fill="transparent" stroke-width="13" class="hour" id="h${i}" stroke-dashoffset="0" stroke-dasharray="0,1" />`;
-//     elem += `</svg>`;
-//     if (i % 2 == 0) {
-//         // top
-//         xx += size * i;
-//         dd = 0;
-//     }
-//     if (i == 8) {
-//         pathLength -= (form * Math.PI) / 2;
-//     }
-// }
-// pathLength = Math.floor(pathLength - pathLength / 24 / 4);
-// spiral.querySelector("#circles").innerHTML += elem;
-spiral.querySelector("#circles").innerHTML = circles;
+const names = ["line", "min", "hour"];
+let ii = 0;
+spiral.querySelector("#circles").innerHTML = circles + circles + circles;
+spiral.querySelectorAll("#circles svg").forEach((e) => {
+    e.classList.add(names[ii++]);
+});
 
-// ticks
-// let j = 0;
-// let offset = 0;
-// let offs = [];
-// spiral.querySelectorAll("svg").forEach((e) => {
-//     j = j == 1 ? 0 : 1;
-//     const rad = Math.floor(size * (e.id.substring(4) - 1 + 2) * Math.PI);
-//     const pathM = e.querySelector(".min");
-//     pathM.setAttribute("stroke-dasharray", `1,${(e.id.substring(4) == 0 ? 2 : 1) * (pathLength / 24 / 4 - 1)}`);
-//     pathM.setAttribute("stroke-dashoffset", `${-(3 + offset + j * rad)}`);
-//     const pathH = e.querySelector(".hour");
-//     pathH.setAttribute("stroke-dasharray", `2,${pathLength / 24 - 2}`);
-//     pathH.setAttribute("stroke-dashoffset", `${-(3 + offset + j * rad)}`);
-//     if (e.id.substring(4) == 0) {
-//         offset = pathLength / 24 / 4;
-//         offs.push(offset);
-//     }
-//     offset = pathLength / 24 - ((rad - offset) % (pathLength / 24));
-//     offs.push(offset);
-// });
-
-// numbers ticks
-// for (let i = 0; i <= 24; i++) {
-//     spiral.querySelector("#numbs").innerHTML += `<div class="hour" id="hi${i}">${i}</div>`;
-// }
-spiral.querySelector("#numbers").innerHTML += numbers;
+spiral.querySelector("#numbers").innerHTML = numbers;
 
 // segments
 let blockedTime = [5.25, 6.5].map((e) => e * 4);
@@ -103,7 +29,7 @@ spiral.querySelectorAll(".segments").forEach((e) => {
 });
 spiral.querySelector(".handles").innerHTML = handels;
 
-let ids = ["fragsBg", "fragsFg", "handsBg", "circsFg", "numbsFg", "inputsFg"].sort();
+let ids = ["fragsBg", "fragsFg", "handsBg", "circsFg", "circsM", "circsH", "numbsFg", "inputsFg"].sort();
 let inxId = 0;
 [...spiral.querySelectorAll(".container svg")]
     .sort((a, b) => a.classList[0].localeCompare(b.classList[0]))
@@ -119,6 +45,52 @@ spiral.querySelectorAll(".inputs input").forEach((e) => {
 const handlesBg = spiral.querySelector("#handsBg");
 const segmentsFg = spiral.querySelector("#fragsFg");
 const segmentsBg = spiral.querySelector("#fragsBg");
+const circsFg = spiral.querySelector("#circsFg");
+const circMin = spiral.querySelector(".circles .min");
+const circH = spiral.querySelector(".circles .hour");
+
+let pathLength = 0;
+let pLengths = [];
+let offset = 0;
+[...circsFg.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((e) => {
+        pathLength += e.getTotalLength();
+        pLengths.push(e.getTotalLength());
+    });
+
+const strokWidth = 1;
+const o = 0;
+pathLength = Math.floor(pathLength - pathLength / 24 / 4) - o - strokWidth;
+
+ii = 0;
+[...circMin.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((eM) => {
+        eM.setAttribute(
+            "stroke-dasharray",
+            `${strokWidth / 2},${(offset == 0 ? 2 : 1) * (pathLength / 24 / 4 - strokWidth / 2)}`
+        );
+        eM.setAttribute("stroke-dashoffset", `${-(o + offset)}`);
+        eM.setAttribute("stroke-width", `4`);
+        eM.setAttribute("stroke", `black`);
+        offset = pathLength / 24 - ((pLengths[ii++] - offset) % (pathLength / 24));
+    });
+
+ii = 0;
+offset = 0;
+[...circH.children]
+    .filter((e) => e.nodeName == "path")
+    .forEach((eH) => {
+        eH.setAttribute("stroke-dasharray", `${strokWidth},${pathLength / 24 - strokWidth}`);
+        eH.setAttribute("stroke-dashoffset", `${-(o + offset)}`);
+        eH.setAttribute("stroke-width", `8`);
+        eH.setAttribute("stroke", `black`);
+        offset = pathLength / 24 - ((pLengths[ii++] - offset) % (pathLength / 24));
+        if (ii == 1) {
+            offset += pathLength / 24 / 4;
+        }
+    });
 
 let cc = 0;
 [...segmentsFg.children]
@@ -166,6 +138,13 @@ cc = 0;
         }
     });
 
+spiral.querySelectorAll(".time").forEach((e) => {
+    e.setCustomValidity("empty");
+});
+spiral.querySelector("#durIn").setCustomValidity("empty");
+
+let oldDur = spiral.querySelector("#durIn").value;
+
 // using fragments coloring
 [...segmentsFg.children]
     .filter((e) => e.nodeName == "path")
@@ -181,7 +160,6 @@ cc = 0;
                             ((start / 4) % 1) * 60 ? ((start / 4) % 1) * 60 : "00"
                         }`.format();
                     });
-                    spiral.querySelector(".dur").value = "00:00";
                     currClick = null;
                     for (let i = 0; i < 96; i++) {
                         const elemI = segmentsBg.querySelector("#sb" + i);
@@ -297,26 +275,33 @@ const fillSegs = (e, input) => {
             start = startEnd[0] + diff;
             currClick = end;
             startEnd = [start, startEnd[1] + diff];
-            spiral.querySelector(".dur").value = `${Math.floor((startEnd[1] - startEnd[0]) / 4) ?? "00"}:${
-                (((startEnd[1] - startEnd[0]) / 4) % 1) * 60 ? (((startEnd[1] - startEnd[0]) / 4) % 1) * 60 : "00"
+            oldDur = spiral.querySelector("#durIn").value = `${
+                Math.floor((startEnd[1] - startEnd[0] + 1) / 4) ?? "00"
+            }:${
+                (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+                    ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+                    : "00"
             }`.format();
             spiral.querySelector("#startIn").value = `${Math.floor(startEnd[0] / 4)}:${
                 ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
             }`.format();
-            spiral.querySelector("#endIn").value = `${Math.floor(startEnd[1] / 4)}:${
-                ((startEnd[1] / 4) % 1) * 60 ? ((startEnd[1] / 4) % 1) * 60 : "00"
+            spiral.querySelector("#endIn").value = `${Math.floor((startEnd[1] + 1) / 4)}:${
+                (((startEnd[1] + 1) / 4) % 1) * 60 ? (((startEnd[1] + 1) / 4) % 1) * 60 : "00"
             }`.format();
-            handlesBg.querySelector("#sh" + startEnd[0]).classList.add("hidden");
-            handlesBg.querySelector("#sh" + startEnd[1]).classList.add("hidden");
-            handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("hidden");
-            handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
             for (let i = 0; i < 96; i++) {
                 const elemI = segmentsBg.querySelector("#sb" + i);
+                const elemI2 = handlesBg.querySelector("#sh" + i);
                 if (startEnd[0] <= i && startEnd[1] >= i) {
                     elemI.classList.add("selected");
                     elemI.classList.add("clicked");
+                    if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i+1)) {
+                        elemI2.classList.remove("hidden");
+                    } else {
+                        elemI2.classList.add("hidden");
+                    }
                 } else {
                     elemI.classList.remove("selected");
+                    elemI2.classList.add("hidden");
                 }
             }
         }
@@ -329,72 +314,90 @@ const fillSegs = (e, input) => {
             segmentsBg.querySelector("#sb" + startEnd[0]).classList.remove("active");
             segmentsBg.querySelector("#sb" + startEnd[1]).classList.remove("active");
         }
-        startEnd = [start, end].sort((a, b) => a - b);
-        if (startEnd[0] != -1 && startEnd[1] != -1) {
-            handlesBg.querySelector("#sh" + end).classList.add("clicked");
-            segmentsBg.querySelector("#sb" + end).classList.add("active");
-            handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("hidden");
-            handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
+        if (start == -1) {
+            start = end;
         }
-        spiral.querySelector(".dur").value = `${Math.floor((startEnd[1] - startEnd[0]) / 4)}:${
-            (((startEnd[1] - startEnd[0]) / 4) % 1) * 60 ? (((startEnd[1] - startEnd[0]) / 4) % 1) * 60 : "00"
+        startEnd = [start, end].sort((a, b) => a - b);
+        handlesBg.querySelector("#sh" + end).classList.add("clicked");
+        segmentsBg.querySelector("#sb" + end).classList.add("active");
+        handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("hidden");
+        handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
+        oldDur = spiral.querySelector("#durIn").value = `${Math.floor((startEnd[1] - startEnd[0] + 1) / 4)}:${
+            (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60 ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60 : "00"
         }`.format();
         spiral.querySelector("#startIn").value = `${Math.floor(startEnd[0] / 4)}:${
             ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
         }`.format();
         spiral.querySelector("#endIn").value = `${Math.floor(startEnd[1] / 4)}:${
-            ((startEnd[1] / 4) % 1) * 60 ? ((startEnd[1] / 4) % 1) * 60 : "00"
+            (((startEnd[1] + 1) / 4) % 1) * 60 ? (((startEnd[1] + 1) / 4) % 1) * 60 : "00"
         }`.format();
         for (let i = 0; i < 96; i++) {
             const elemI = segmentsBg.querySelector("#sb" + i);
+            const elemI2 = handlesBg.querySelector("#sh" + i);
             if (startEnd[0] <= i && startEnd[1] >= i) {
                 elemI.classList.add("selected");
                 elemI.classList.add("clicked");
+                if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i+1)) {
+                    elemI2.classList.remove("hidden");
+                } else {
+                    elemI2.classList.add("hidden");
+                }
             } else {
                 elemI.classList.remove("selected");
                 elemI.classList.remove("clicked");
+                elemI2.classList.add("hidden");
             }
         }
         segmentsBg.querySelector("#sb" + end).classList.add("clicked");
     }
+    spiral.querySelectorAll(".time").forEach((e) => {
+        const val = Math.floor((Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4);
+        if (disabled.includes(val + 1)) {
+            e.setCustomValidity("disabled");
+        } else if (blocked.includes(val + 1)) {
+            e.setCustomValidity("reserved");
+        } else {
+            e.setCustomValidity("");
+        }
+    });
+    const dur = spiral.querySelector("#durIn");
+    dur.setCustomValidity(dur.value == "00:00" ? "empty" : "");
 };
 
-spiral.querySelectorAll(".inputs input").forEach((e) => {
+spiral.querySelectorAll(".inputs .time").forEach((e) => {
     e.oninput = (e) => {
-        const val = Math.floor((Number(e.target.value.split(":")[0]) + Number(e.target.value.split(":")[1]) / 60) * 4);
-        if (e.target.name === "duration") {
-            start = start == -1 ? 0 : start;
-            startEnd = [start, start + val];
-            spiral.querySelector("#endIn").value = `${Math.floor(startEnd[1] / 4)}:${
-                ((startEnd[1] / 4) % 1) * 60 ? ((startEnd[1] / 4) % 1) * 60 : "00"
-            }`.format();
-        }
-        if (e.target.name === "start") {
-            start = val;
-            const tmp = startEnd[1] == -1 ? start : startEnd[1];
-            startEnd = [start, tmp];
-            spiral.querySelector("#dur").value = `${Math.floor(startEnd[0] / 4)}:${
-                ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
-            }`.format();
-        }
-        if (e.target.name === "end") {
-            start = start == -1 ? val : start;
-            startEnd = [start, val];
-            spiral.querySelector("#dur").value = `${Math.floor(startEnd[0] / 4)}:${
-                ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
-            }`.format();
-        }
-        if (disabled.includes(val + 1)) {
-            e.target.setCustomValidity("disabled");
-        } else if (blocked.includes(val + 1)) {
-            e.target.setCustomValidity("reserved");
-        } else {
-            e.target.setCustomValidity("");
+        const val =
+            Math.floor((Number(e.target.value.split(":")[0]) + Number(e.target.value.split(":")[1]) / 60) * 4) -
+            (e.target.name == "end" ? 1 : 0);
+        spiral.querySelectorAll(".time").forEach((e) => {
+            const val = Math.floor((Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4);
+            if (disabled.includes(val + 1)) {
+                e.setCustomValidity("disabled");
+            } else if (blocked.includes(val + 1)) {
+                e.setCustomValidity("reserved");
+            } else {
+                e.setCustomValidity("");
+            }
+        });
+        if (e.target.checkValidity()) {
+            if (e.target.name === "start") {
+                start = val;
+                const end = startEnd[1] == -1 ? start : startEnd[1];
+                // startEnd = [start, end].sort();
+            }
+            if (e.target.name === "end") {
+                start = start == -1 ? val : start;
+                // startEnd = [start, val].sort();
+            }
             fillSegs(null, val);
         }
     };
 });
 
+spiral.querySelector("#durIn").oninput = (e) => {
+    e.target.value = oldDur;
+};
+
 String.prototype.format = function () {
-    return (this.length == 4 ? "0" : "") + String(this);
+    return this.includes("-") ? "00:00" : (this.length == 4 ? "0" : "") + String(this);
 };

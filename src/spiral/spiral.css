@@ -16,9 +16,8 @@
 #spiralTime {
     position: relative;
     width: var(--size);
-    height: var(--size);
+    height: calc(20px + var(--size));
     font-family: Arial, Helvetica, sans-serif;
-    /* scale: 0.8; */
 
     > div {
         position: relative;
@@ -31,6 +30,7 @@
     background-color: var(--light-color);
     border-radius: 5px;
 }
+
 /* ------------- */
 #spiralTime #segmentsFg {
     z-index: 101;
@@ -40,6 +40,10 @@
 }
 #circles {
     z-index: 90;
+
+    > svg {
+        position: absolute;
+    }
 }
 
 #spiralTime .circles,
@@ -51,28 +55,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: var(--size);
-    height: var(--size); */
+    width: var(--size);
+    height: calc(20px + var(--size));
 }
 
-/* for line frags */
-#spiralTime .hands,
-#spiralTime .frags {
-    display: inline;
-    /* scale: 1.05; */
-    /* margin-top: -25px;
-    margin-left: -10px; */
-}
-
-/* .lll {
-    transform: translate(0%, -100%);
-} */
 .hidden {
     display: none;
 }
 
 /* svg styles */
-
 #segmentsBg#segmentsBg .seg.disabled {
     fill: var(--disabled-color) !important;
 }
@@ -142,217 +133,3 @@
     left: 10px;
     bottom: 10px;
 }
-
-/* -------------- */
-/* #spiralTime .hour {
-    position: absolute;
-    z-index: 90;
-    color: var(--dark-color);
-    border-radius: 50%;
-    padding: 2px;
-    display: none;
-} */
-
-/* -----outside----- */
-/* #spiralTime #h0 {
-    left: 230px;
-    top: 250px;
-}
-#spiralTime #h1 {
-    left: 230px;
-    top: 325px;
-}
-#spiralTime #h2 {
-    left: 210px;
-    top: 190px;
-}
-#spiralTime #h3 {
-    left: 345px;
-    top: 213px;
-}
-#spiralTime #h4 {
-    left: 315px;
-    top: 350px;
-}
-#spiralTime #h5 {
-    left: 170px;
-    top: 345px;
-}
-#spiralTime #h6 {
-    left: 135px;
-    top: 215px;
-}
-#spiralTime #h7 {
-    left: 240px;
-    top: 120px;
-}
-#spiralTime #h8 {
-    left: 375px;
-    top: 160px;
-}
-#spiralTime #h9 {
-    left: 405px;
-    top: 300px;
-}
-#spiralTime #h10 {
-    left: 305px;
-    top: 410px;
-}
-#spiralTime #h11 {
-    left: 165px;
-    top: 405px;
-}
-#spiralTime #h12 {
-    left: 75px;
-    top: 295px;
-}
-#spiralTime #h13 {
-    left: 100px;
-    top: 160px;
-}
-#spiralTime #h14 {
-    left: 210px;
-    top: 75px;
-}
-#spiralTime #h15 {
-    left: 350px;
-    top: 85px;
-}
-#spiralTime #h16 {
-    left: 445px;
-    top: 190px;
-}
-#spiralTime #h17 {
-    left: 445px;
-    top: 330px;
-}
-#spiralTime #h18 {
-    left: 355px;
-    top: 440px;
-}
-#spiralTime #h19 {
-    left: 220px;
-    top: 470px;
-}
-#spiralTime #h20 {
-    left: 90px;
-    top: 415px;
-}
-#spiralTime #h21 {
-    left: 25px;
-    top: 295px;
-}
-#spiralTime #h22 {
-    left: 40px;
-    top: 160px;
-}
-#spiralTime #h23 {
-    left: 135px;
-    top: 55px;
-}
-#spiralTime #h24 {
-    left: 270px;
-    top: 15px;
-} */
-
-/* -----inside----- */
-/* #spiralTime #hi0 {
-    left: 265px;
-    top: 245px;
-}
-#spiralTime #hi1 {
-    left: 235px;
-    top: 290px;
-}
-#spiralTime #hi2 {
-    left: 230px;
-    top: 210px;
-}
-#spiralTime #hi3 {
-    left: 320px;
-    top: 223px;
-}
-#spiralTime #hi4 {
-    left: 295px;
-    top: 320px;
-}
-#spiralTime #hi5 {
-    left: 190px;
-    top: 320px;
-}
-#spiralTime #hi6 {
-    left: 165px;
-    top: 225px;
-}
-#spiralTime #hi7 {
-    left: 245px;
-    top: 150px;
-}
-#spiralTime #hi8 {
-    left: 350px;
-    top: 185px;
-}
-#spiralTime #hi9 {
-    left: 375px;
-    top: 295px;
-}
-#spiralTime #hi10 {
-    left: 295px;
-    top: 380px;
-}
-#spiralTime #hi11 {
-    left: 180px;
-    top: 375px;
-}
-#spiralTime #hi12 {
-    left: 115px;
-    top: 290px;
-}
-#spiralTime #hi13 {
-    left: 130px;
-    top: 175px;
-}
-#spiralTime #hi14 {
-    left: 220px;
-    top: 105px;
-}
-#spiralTime #hi15 {
-    left: 335px;
-    top: 115px;
-}
-#spiralTime #hi16 {
-    left: 410px;
-    top: 200px;
-}
-#spiralTime #hi17 {
-    left: 410px;
-    top: 320px;
-}
-#spiralTime #hi18 {
-    left: 335px;
-    top: 410px;
-}
-#spiralTime #hi19 {
-    left: 220px;
-    top: 440px;
-}
-#spiralTime #hi20 {
-    left: 115px;
-    top: 390px;
-}
-#spiralTime #hi21 {
-    left: 60px;
-    top: 290px;
-}
-#spiralTime #hi22 {
-    left: 80px;
-    top: 170px;
-}
-#spiralTime #hi23 {
-    left: 155px;
-    top: 80px;
-}
-#spiralTime #hi24 {
-    left: 270px;
-    top: 50px;
-} */
