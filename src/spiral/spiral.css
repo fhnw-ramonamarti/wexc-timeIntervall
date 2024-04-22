@@ -49,6 +49,7 @@
 #spiralTime .circles,
 #spiralTime .numbers,
 #spiralTime .handles,
+#spiralTime .segments2,
 #spiralTime .segments {
     position: absolute;
     box-sizing: border-box;
@@ -64,6 +65,9 @@
 }
 
 /* svg styles */
+#fragsSelBg:has(>.clicked) {
+    filter: drop-shadow(0 0 5px var(--dark-color)) !important;
+}
 #segmentsBg#segmentsBg .seg.disabled {
     fill: var(--disabled-color) !important;
 }
@@ -73,12 +77,16 @@
 #segmentsBg .seg {
     fill: var(--light-color) !important;
 }
+#fragsSelBg .seg.selected ,
 #segmentsBg .seg.selected {
     fill: var(--primary-color) !important;
 }
+#fragsSelBg .selected.hover:not(.clicked) ,
 #segmentsBg .selected.hover:not(.clicked) {
     fill: var(--primary-light-color) !important;
 }
+#fragsSelBg .selected.clicked.active.first,
+#fragsSelBg .selected.clicked.active.last ,
 #segmentsBg .selected.clicked.active.first,
 #segmentsBg .selected.clicked.active.last {
     filter: url(#shadows);
@@ -112,7 +120,7 @@
         font-size: 1rem;
         z-index: 200;
 
-        &:user-invalid ,
+        &:user-invalid,
         &:invalid {
             color: red;
         }

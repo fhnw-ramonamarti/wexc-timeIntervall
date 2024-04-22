@@ -32,6 +32,7 @@ spiral.querySelector(".handles").innerHTML = handels;
 let ids = ["fragsBg", "fragsFg", "handsBg", "circsFg", "circsM", "circsH", "numbsFg", "inputsFg"].sort();
 let inxId = 0;
 [...spiral.querySelectorAll(".container svg")]
+    .filter((e) => e.classList.length > 0)
     .sort((a, b) => a.classList[0].localeCompare(b.classList[0]))
     .forEach((e) => {
         e.setAttribute("width", spiral.clientWidth);
@@ -45,6 +46,7 @@ spiral.querySelectorAll(".inputs input").forEach((e) => {
 const handlesBg = spiral.querySelector("#handsBg");
 const segmentsFg = spiral.querySelector("#fragsFg");
 const segmentsBg = spiral.querySelector("#fragsBg");
+const fragsSelBg = spiral.querySelector("#fragsSelBg");
 const circsFg = spiral.querySelector("#circsFg");
 const circMin = spiral.querySelector(".circles .min");
 const circH = spiral.querySelector(".circles .hour");
@@ -210,11 +212,15 @@ let oldDur = spiral.querySelector("#durIn").value;
                         }
                     }
                     currClick = temp;
+                    fillClickedSegs();
                 }
             });
             elem.addEventListener("mouseenter", (e) => {
                 if (clicked) {
                     fillSegs(e.target);
+                }
+                if (currClick) {
+                    fillClickedSegs();
                 }
                 const val = e.target.getAttribute("data-value");
                 if (startEnd[1] != -1 && startEnd[0] <= val && startEnd[1] >= val) {
@@ -235,6 +241,7 @@ let oldDur = spiral.querySelector("#durIn").value;
                     handlesBg
                         .querySelector("#sh" + e.target.id[(1, e.target.id.length - 1)])
                         .classList.remove("clicked");
+                    fillClickedSegs();
                 }
                 for (let i = startEnd[0]; i <= startEnd[1] && i != -1; i++) {
                     const elemI = segmentsBg.querySelector("#sb" + i);
@@ -258,12 +265,14 @@ let oldDur = spiral.querySelector("#durIn").value;
                     handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("clicked");
                     handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("clicked");
                 }
+                fillClickedSegs();
             });
         }
     });
 segmentsFg.addEventListener("mouseleave", (e) => {
     clicked = false;
     currClick = null;
+    fillClickedSegs();
 });
 
 // using fragments coloring
@@ -294,7 +303,7 @@ const fillSegs = (e, input) => {
                 if (startEnd[0] <= i && startEnd[1] >= i) {
                     elemI.classList.add("selected");
                     elemI.classList.add("clicked");
-                    if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i+1)) {
+                    if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i + 1)) {
                         elemI2.classList.remove("hidden");
                     } else {
                         elemI2.classList.add("hidden");
@@ -337,7 +346,7 @@ const fillSegs = (e, input) => {
             if (startEnd[0] <= i && startEnd[1] >= i) {
                 elemI.classList.add("selected");
                 elemI.classList.add("clicked");
-                if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i+1)) {
+                if ((startEnd[0] == i || startEnd[1] == i) && ![...disabled, ...blocked].includes(i + 1)) {
                     elemI2.classList.remove("hidden");
                 } else {
                     elemI2.classList.add("hidden");
@@ -362,6 +371,18 @@ const fillSegs = (e, input) => {
     });
     const dur = spiral.querySelector("#durIn");
     dur.setCustomValidity(dur.value == "00:00" ? "empty" : "");
+};
+
+const fillClickedSegs = () => {
+    const fragsSelBg = spiral.querySelector("#fragsSelBg");
+    const newSel = fragsSelBg.cloneNode(true);
+    newSel.innerHTML = "";
+    segmentsBg.querySelectorAll(".selected").forEach((s) => {
+        const node = s.cloneNode(true);
+        node.id = "s" + node.id;
+        newSel.append(node);
+    });
+    fragsSelBg.replaceWith(newSel);
 };
 
 spiral.querySelectorAll(".inputs .time").forEach((e) => {
