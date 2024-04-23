@@ -20,7 +20,7 @@ const segments = `
     <feOffset dx='0' dy='0' />
     <feGaussianBlur stdDeviation='3' result='offset-blur' />
     <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
-    <feFlood flood-color='black' flood-opacity='.95' result='color' />
+    <feFlood flood-color='black' flood-opacity='.9' result='color' />
     <feComposite operator='in' in='color' in2='inverse' result='shadow' />
     <feComposite operator='over' in='shadow' in2='SourceGraphic' />
 </filter></defs>
@@ -125,9 +125,14 @@ const segments = `
 
 const handels = `
 <svg class="hands" width="320" height="340" viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs><filter id="shadow">
-    <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="white" />
-</filter></defs>
+<defs>
+    <filter id="shadow">
+        <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="white" />
+    </filter>
+    <filter id="shadow-click">
+        <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="grey" />
+    </filter>
+</defs>
 <path d="M172.642 172.508L172.095 170.584L174.018 170.037L174.566 171.961L172.642 172.508ZM171.547 168.661L171 166.737L172.924 166.19L173.471 168.113L171.547 168.661ZM176.49 171.413L175.942 169.489L177.866 168.942L178.413 170.866L176.49 171.413ZM175.395 167.566L174.847 165.642L176.771 165.095L177.318 167.018L175.395 167.566ZM180.337 170.318L179.789 168.395L181.713 167.847L182.26 169.771L180.337 170.318ZM179.242 166.471L178.694 164.547L180.618 164L181.166 165.924L179.242 166.471Z" fill="black"/>
 <path d="M178.204 184.025L178.192 182.025L180.192 182.012L180.204 184.012L178.204 184.025ZM178.179 180.024L178.166 178.024L180.166 178.012L180.179 180.012L178.179 180.024ZM182.205 183.999L182.191 181.999L184.192 181.986L184.205 183.986L182.205 183.999ZM182.179 179.999L182.166 177.998L184.166 177.986L184.179 179.987L182.179 179.999ZM186.204 183.974L186.192 181.974L188.191 181.96L188.205 183.96L186.204 183.974ZM186.179 179.973L186.166 177.973L188.166 177.96L188.179 179.961L186.179 179.973Z" fill="black"/>
 <path d="M171 193.871L172.168 192.247L173.792 193.415L172.624 195.039L171 193.871ZM173.336 190.624L174.504 189L176.128 190.168L174.96 191.792L173.336 190.624ZM174.247 196.207L175.415 194.583L177.039 195.751L175.871 197.375L174.247 196.207ZM176.583 192.96L177.751 191.336L179.375 192.504L178.207 194.128L176.583 192.96ZM177.494 198.543L178.662 196.919L180.286 198.087L179.118 199.711L177.494 198.543ZM179.83 195.296L180.998 193.672L182.622 194.84L181.454 196.464L179.83 195.296Z" fill="black"/>
