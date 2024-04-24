@@ -5,7 +5,7 @@
     --secondary-color: #cc98c7ff;
     --disabled-color: #909abdff;
     --dark-color: #3d4b48ff;
-    --light-color: #E5E7F6;
+    --light-color: #e5e7f6;
 
     --shadow-light: 0 0 5px 5px var(--light-color);
     --shadow-dark: 0 0 5px 5px var(--dark-color);
@@ -66,7 +66,7 @@
 }
 
 /* svg styles */
-#fragsSelBg:has(>.clicked) {
+#fragsSelBg:has(> .clicked) {
     filter: drop-shadow(0 0 5px var(--dark-color)) !important;
 }
 #segmentsBg#segmentsBg .seg.disabled {
@@ -81,12 +81,12 @@
     fill: var(--light-color) !important;
     stroke: var(--light-color) !important;
 }
-#fragsSelBg .seg.selected ,
+#fragsSelBg .seg.selected,
 #segmentsBg .seg.selected {
     fill: var(--primary-color) !important;
     stroke: var(--primary-color) !important;
 }
-#fragsSelBg .selected.hover:not(.clicked) ,
+#fragsSelBg .selected.hover:not(.clicked),
 #segmentsBg .selected.hover:not(.clicked) {
     fill: var(--primary-light-color) !important;
     stroke: var(--primary-light-color) !important;
@@ -110,13 +110,30 @@
     position: relative;
     width: 100%;
     height: 100%;
-    
+
     label {
         display: inline-flex;
         flex-direction: column;
         text-align: center;
         gap: 0.3rem;
         font-size: 1rem;
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+
+    input[type="time"] {
+        -moz-appearance: textfield;
     }
 
     input {
