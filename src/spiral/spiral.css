@@ -75,6 +75,7 @@
 }
 #segmentsBg#segmentsBg .seg.reserved {
     fill: var(--secondary-color) !important;
+    /* fill: url(#gradient) !important; */
     stroke: var(--secondary-color) !important;
 }
 #segmentsBg .seg {
@@ -91,11 +92,11 @@
     fill: var(--primary-light-color) !important;
     stroke: var(--primary-light-color) !important;
 }
-/* #fragsSelBg .selected.clicked.active.first,
-#fragsSelBg .selected.clicked.active.last , */
+#fragsSelBg .selected.clicked.active.first,
+#fragsSelBg .selected.clicked.active.last ,
 #segmentsBg .selected.clicked.active.first,
 #segmentsBg .selected.clicked.active.last {
-    filter: url(#shadows);
+    fill: url(#radial) !important;
 }
 .hand {
     fill: var(--dark-color);
@@ -130,10 +131,6 @@
         right: 0;
         top: 0;
         width: auto;
-    }
-
-    input[type="time"] {
-        -moz-appearance: textfield;
     }
 
     input {

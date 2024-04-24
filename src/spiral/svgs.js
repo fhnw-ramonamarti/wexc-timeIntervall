@@ -16,14 +16,24 @@ const circles = `
 
 const segments = `
 <svg class="frags" width="320" height="340" viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs><filter id="shadows">
-    <feOffset dx='0' dy='0' />
-    <feGaussianBlur stdDeviation='3' result='offset-blur' />
-    <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
-    <feFlood flood-color='black' flood-opacity='.9' result='color' />
-    <feComposite operator='in' in='color' in2='inverse' result='shadow' />
-    <feComposite operator='over' in='shadow' in2='SourceGraphic' />
-</filter></defs>
+<defs>
+    <radialGradient id="radial">
+        <stop offset="30%"   stop-color="#90bdb5ff"/>
+        <stop offset="100%"   stop-color="#779892"/>
+    </radialGradient>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(0)">
+      <stop offset="40%"   stop-color="#90bdb5ff"/>
+      <stop offset="60%"   stop-color="#e5e7f6"/>
+    </linearGradient>
+    <filter id="shadows">
+        <feOffset dx='0' dy='0' />
+        <feGaussianBlur stdDeviation='3' result='offset-blur' />
+        <feComposite operator='out' in='SourceGraphic' in2='offset-blur' result='inverse' />
+        <feFlood flood-color='black' flood-opacity='.9' result='color' />
+        <feComposite operator='in' in='color' in2='inverse' result='shadow' />
+        <feComposite operator='over' in='shadow' in2='SourceGraphic' />
+    </filter>
+</defs>
 <path d="M160.016 178.997C162.48 155.993 190.477 153.949 197.002 170.439L160.016 178.997Z" stroke="#000000" stroke-opacity="0.1" stroke-width="1"/>
 <path d="M197.002 170.439L160.016 178.997L195.042 195.942C199.409 186.125 200.106 180.552 197.002 170.439Z" stroke="#000000" stroke-opacity="0.1" stroke-width="1"/>
 <path d="M195.042 195.942L160.016 178.997L177.069 213.47C185.277 209.351 189.281 205.654 195.042 195.942Z" stroke="#000000" stroke-opacity="0.1" stroke-width="1"/>

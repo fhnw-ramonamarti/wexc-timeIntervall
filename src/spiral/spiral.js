@@ -71,6 +71,14 @@ const strokWidth = 1;
 const o = 0;
 pathLength = Math.floor(pathLength - pathLength / 24 / 4) - o - strokWidth;
 
+pLengths.forEach((p, pi) => {
+    if (pi === pLengths.length - 1) {
+        console.log(360 / (p / (pathLength / 24 / 4 / 4)));
+    } else {
+        console.log(360 / (p / (pathLength / 24 / 4 / 2)));
+    }
+});
+
 ii = 0;
 [...circMin.children]
     .filter((e) => e.nodeName === "path")
