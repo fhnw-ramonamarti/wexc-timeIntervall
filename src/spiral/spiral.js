@@ -15,9 +15,9 @@ spiral.querySelectorAll("#circles svg").forEach((e) => {
 spiral.querySelector("#numbers").innerHTML = numbers;
 
 // segments
-let blockedTime = [5.25, 6.5].map((e) => e * 4);
+let blockedTime = [5.25, 8.5].map((e, ei) => (ei % 2 === 1 ? e * 4 : e * 4 + 1));
 let blocked = [...Array(blockedTime[1] - blockedTime[0] + 1).keys()].map((e) => e + blockedTime[0]);
-let disabledTime = [0, 2, 22, 24].map((e) => e * 4);
+let disabledTime = [0, 2, 22, 24].map((e, ei) => (ei % 2 === 1 ? e * 4 : e * 4 + 1));
 let disabled = [
     ...[...Array(disabledTime[1] - disabledTime[0] + 1).keys()].map((e) => e + disabledTime[0]),
     ...[...Array(disabledTime[3] - disabledTime[2] + 1).keys()].map((e) => e + disabledTime[2]),
