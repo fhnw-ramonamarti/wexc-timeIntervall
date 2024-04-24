@@ -1,6 +1,9 @@
 import { circles, segments, handels, numbers } from "./svgs.js";
 
 const spiral = document.querySelector("#spiralTime");
+const padding = 100;
+const height = spiral.clientHeight - padding;
+const width = spiral.clientWidth - padding;
 
 const names = ["line", "min", "hour"];
 let ii = 0;
@@ -35,8 +38,8 @@ let inxId = 0;
     .filter((e) => e.classList.length > 0)
     .sort((a, b) => a.classList[0].localeCompare(b.classList[0]))
     .forEach((e) => {
-        e.setAttribute("width", spiral.clientWidth);
-        e.setAttribute("height", spiral.clientHeight);
+        e.setAttribute("width", width);
+        e.setAttribute("height", height);
         e.id = ids[inxId++];
     });
 spiral.querySelectorAll(".inputs input").forEach((e) => {
