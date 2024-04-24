@@ -46,10 +46,13 @@ spiral.querySelectorAll(".inputs input").forEach((e) => {
     e.step = "900";
 });
 
+const fragsSelBg = spiral.querySelector("#fragsSelBg");
+fragsSelBg.setAttribute("width", width);
+fragsSelBg.setAttribute("height", height);
+
 const handlesBg = spiral.querySelector("#handsBg");
 const segmentsFg = spiral.querySelector("#fragsFg");
 const segmentsBg = spiral.querySelector("#fragsBg");
-const fragsSelBg = spiral.querySelector("#fragsSelBg");
 const circsFg = spiral.querySelector("#circsFg");
 const circMin = spiral.querySelector(".circles .min");
 const circH = spiral.querySelector(".circles .hour");
