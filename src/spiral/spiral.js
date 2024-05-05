@@ -1,13 +1,13 @@
-import { circles, segments, handels, numbers } from "./svgs.js";
+import { circles, ticks, segments, handels, numbers } from "./svgs.js";
 
 const spiral = document.querySelector("#spiralTime");
 const padding = 100;
 const height = spiral.clientHeight - padding;
 const width = spiral.clientWidth - padding;
 
-const names = ["line", "min", "hour"];
+const names = ["line", "ticks"];
 let ii = 0;
-spiral.querySelector("#circles").innerHTML = circles + circles + circles;
+spiral.querySelector("#circles").innerHTML = circles + ticks;
 spiral.querySelectorAll("#circles svg").forEach((e) => {
     e.classList.add(names[ii++]);
 });
@@ -32,7 +32,7 @@ spiral.querySelectorAll(".segments").forEach((e) => {
 });
 spiral.querySelector(".handles").innerHTML = handels;
 
-let ids = ["fragsBg", "fragsFg", "handsBg", "circsFg", "circsM", "circsH", "numbsFg", "inputsFg"].sort();
+let ids = ["fragsBg", "fragsFg", "handsBg", "circsFg", "ticksM", "numbsFg", "inputsFg"].sort();
 let inxId = 0;
 [...spiral.querySelectorAll(".container svg")]
     .filter((e) => e.classList.length > 0)
@@ -54,12 +54,10 @@ const handlesBg = spiral.querySelector("#handsBg");
 const segmentsFg = spiral.querySelector("#fragsFg");
 const segmentsBg = spiral.querySelector("#fragsBg");
 const circsFg = spiral.querySelector("#circsFg");
-const circMin = spiral.querySelector(".circles .min");
-const circH = spiral.querySelector(".circles .hour");
+const ticksBg = spiral.querySelector(".circles svg.ticks");
 
 let pathLength = 0;
 let pLengths = [];
-let offset = 0;
 [...circsFg.children]
     .filter((e) => e.nodeName === "path")
     .forEach((e) => {
@@ -70,43 +68,6 @@ let offset = 0;
 const strokWidth = 1;
 const o = 0;
 pathLength = Math.floor(pathLength - pathLength / 24 / 4) - o - strokWidth;
-
-pLengths.forEach((p, pi) => {
-    if (pi === pLengths.length - 1) {
-        console.log(360 / (p / (pathLength / 24 / 4 / 4)));
-    } else {
-        console.log(360 / (p / (pathLength / 24 / 4 / 2)));
-    }
-});
-
-ii = 0;
-[...circMin.children]
-    .filter((e) => e.nodeName === "path")
-    .forEach((eM) => {
-        eM.setAttribute(
-            "stroke-dasharray",
-            `${strokWidth / 2},${(offset === 0 ? 2 : 1) * (pathLength / 24 / 4 - strokWidth / 2)}`
-        );
-        eM.setAttribute("stroke-dashoffset", `${-(o + offset)}`);
-        eM.setAttribute("stroke-width", `4`);
-        eM.setAttribute("stroke", `black`);
-        offset = pathLength / 24 - ((pLengths[ii++] - offset) % (pathLength / 24));
-    });
-
-ii = 0;
-offset = 0;
-[...circH.children]
-    .filter((e) => e.nodeName === "path")
-    .forEach((eH) => {
-        eH.setAttribute("stroke-dasharray", `${strokWidth},${pathLength / 24 - strokWidth}`);
-        eH.setAttribute("stroke-dashoffset", `${-(o + offset)}`);
-        eH.setAttribute("stroke-width", `8`);
-        eH.setAttribute("stroke", `black`);
-        offset = pathLength / 24 - ((pLengths[ii++] - offset) % (pathLength / 24));
-        if (ii === 1) {
-            offset += pathLength / 24 / 4;
-        }
-    });
 
 let cc = 0;
 [...segmentsFg.children]
