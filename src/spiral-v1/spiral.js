@@ -1,23 +1,33 @@
 import { circles, ticks, segments, handels, numbers } from "./svgs.js";
 
 const spiral = document.querySelector("#spiralTime");
+
+["segments", "segmentsSelected", "handles", "segments", "circles", "numbers", "inputs"].forEach(
+    (id, inx) => {
+        const elem = document.createElement("div");
+        elem.id = id + (inx < 3 ? "Bg" : "Fg");
+        elem.classList.add(id);
+        spiral.append(elem);
+    }
+);
+
 const padding = 100;
 const height = spiral.clientHeight - padding;
 const width = spiral.clientWidth - padding;
 
 const names = ["line", "ticks"];
 let ii = 0;
-spiral.querySelector("#circles").innerHTML = circles + ticks;
-spiral.querySelectorAll("#circles svg").forEach((e) => {
+spiral.querySelector("#circlesFg").innerHTML = circles + ticks;
+spiral.querySelectorAll("#circlesFg svg").forEach((e) => {
     e.classList.add(names[ii++]);
 });
 
-spiral.querySelector("#numbers").innerHTML = numbers;
+spiral.querySelector("#numbersFg").innerHTML = numbers;
 
 // segments
 let blockedTime = [5.25, 8.5].map((e, ei) => (ei % 2 === 1 ? e * 4 : e * 4 + 1));
 let blocked = [];
-    // ...Array(blockedTime[1] - blockedTime[0] + 1).keys()].map((e) => e + blockedTime[0]);
+// ...Array(blockedTime[1] - blockedTime[0] + 1).keys()].map((e) => e + blockedTime[0]);
 let disabledTime = [0, 2, 22, 24].map((e, ei) => (ei % 2 === 1 ? e * 4 : e * 4 + 1));
 let disabled = [
     // ...[...Array(disabledTime[1] - disabledTime[0] + 1).keys()].map((e) => e + disabledTime[0]),
@@ -27,6 +37,32 @@ let startEnd = [-1, -1];
 let start = -1;
 let currClick;
 let clicked = false;
+
+spiral.querySelector("#segmentsSelectedBg").innerHTML = `
+    <svg width="480" height="500" viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg" id="fragsSelBg"></svg>
+`;
+spiral.querySelector("#inputsFg").innerHTML = `
+    <label for="" id="startAm">
+        <span>Startzeit AM</span>
+        <input type="time" name="start" id="startAmIn" class="time" value="00:00">
+    </label>
+    <label for="" id="endAm">
+        <span>Endzeit AM</span>
+        <input type="time" name="end" id="endAmIn" class="time" value="00:00">
+    </label>
+    <label for="" id="startPm">
+        <span>Startzeit PM</span>
+        <input type="time" name="start" id="starPmtIn" class="time" value="00:00">
+    </label>
+    <label for="" id="endPm">
+        <span>Endzeit PM</span>
+        <input type="time" name="end" id="endPmIn" class="time" value="00:00">
+    </label>
+`;
+    // <label for="" id="dur">
+    //     <span>Dauer</span>
+    //     <input type="time" name="duration" id="durIn" class="dur" value="00:00">
+    // </label>
 
 spiral.querySelectorAll(".segments").forEach((e) => {
     e.innerHTML = segments;
@@ -119,9 +155,9 @@ cc = 0;
 spiral.querySelectorAll(".time").forEach((e) => {
     e.setCustomValidity("empty");
 });
-spiral.querySelector("#durIn").setCustomValidity("empty");
+// spiral.querySelector("#durIn").setCustomValidity("empty");
 
-let oldDur = spiral.querySelector("#durIn").value;
+// let oldDur = spiral.querySelector("#durIn").value;
 
 // using fragments coloring
 [...segmentsFg.children]
@@ -148,11 +184,15 @@ let oldDur = spiral.querySelector("#durIn").value;
                         elemI2.classList.add("hidden");
                         elemI2.classList.remove("clicked");
                     }
-                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    const elemI = segmentsBg.querySelector(
+                        "#sb" + e.target.getAttribute("data-value")
+                    );
                     elemI.classList.add("selected");
                     elemI.classList.add("clicked");
                     elemI.classList.add("active");
-                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    const elemI2 = handlesBg.querySelector(
+                        "#sh" + e.target.getAttribute("data-value")
+                    );
                     elemI2.classList.add("clicked");
                     elemI.classList.add("active");
                     elemI2.classList.remove("hidden");
@@ -160,10 +200,14 @@ let oldDur = spiral.querySelector("#durIn").value;
                 } else if (temp === startEnd[1]) {
                     // move end
                     start = startEnd[0];
-                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    const elemI = segmentsBg.querySelector(
+                        "#sb" + e.target.getAttribute("data-value")
+                    );
                     elemI.classList.add("clicked");
                     elemI.classList.add("active");
-                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    const elemI2 = handlesBg.querySelector(
+                        "#sh" + e.target.getAttribute("data-value")
+                    );
                     elemI2.classList.add("clicked");
                     elemI2.classList.add("active");
                     for (let i = startEnd[0]; i <= startEnd[1]; i++) {
@@ -173,10 +217,14 @@ let oldDur = spiral.querySelector("#durIn").value;
                 } else if (temp === startEnd[0]) {
                     // move start
                     start = startEnd[1];
-                    const elemI = segmentsBg.querySelector("#sb" + e.target.getAttribute("data-value"));
+                    const elemI = segmentsBg.querySelector(
+                        "#sb" + e.target.getAttribute("data-value")
+                    );
                     elemI.classList.add("clicked");
                     elemI.classList.add("active");
-                    const elemI2 = handlesBg.querySelector("#sh" + e.target.getAttribute("data-value"));
+                    const elemI2 = handlesBg.querySelector(
+                        "#sh" + e.target.getAttribute("data-value")
+                    );
                     elemI2.classList.add("clicked");
                     elemI2.classList.add("active");
                     for (let i = startEnd[0]; i <= startEnd[1]; i++) {
@@ -223,10 +271,14 @@ let oldDur = spiral.querySelector("#durIn").value;
             });
             elem.addEventListener("mouseleave", (e) => {
                 if (clicked) {
-                    const elem = handlesBg.querySelector("#sh" + e.target.id[(1, e.target.id.length - 1)]);
+                    const elem = handlesBg.querySelector(
+                        "#sh" + e.target.id[(1, e.target.id.length - 1)]
+                    );
                     elem.classList.remove("clicked");
                     elem.classList.remove("active");
-                    const elem2 = segmentsBg.querySelector("#sb" + e.target.id[(1, e.target.id.length - 1)]);
+                    const elem2 = segmentsBg.querySelector(
+                        "#sb" + e.target.id[(1, e.target.id.length - 1)]
+                    );
                     elem2.classList.remove("clicked");
                     elem2.classList.remove("active");
                 }
@@ -277,17 +329,17 @@ const fillSegs = (e, input) => {
             start = startEnd[0] + diff;
             currClick = end;
             startEnd = [start, startEnd[1] + diff];
-            oldDur = spiral.querySelector("#durIn").value = `${
-                Math.floor((startEnd[1] - startEnd[0] + 1) / 4) ?? "00"
-            }:${
-                (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
-                    ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
-                    : "00"
-            }`.format();
-            spiral.querySelector("#startIn").value = `${Math.floor(startEnd[0] / 4)}:${
+            // oldDur = spiral.querySelector("#durIn").value = `${
+            //     Math.floor((startEnd[1] - startEnd[0] + 1) / 4) ?? "00"
+            // }:${
+            //     (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+            //         ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+            //         : "00"
+            // }`.format();
+            spiral.querySelector("#startAmIn").value = `${Math.floor(startEnd[0] / 4)}:${
                 ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
             }`.format();
-            spiral.querySelector("#endIn").value = `${Math.floor((startEnd[1] + 1) / 4)}:${
+            spiral.querySelector("#endAmIn").value = `${Math.floor((startEnd[1] + 1) / 4)}:${
                 (((startEnd[1] + 1) / 4) % 1) * 60 ? (((startEnd[1] + 1) / 4) % 1) * 60 : "00"
             }`.format();
             for (let i = 0; i < 96; i++) {
@@ -296,7 +348,10 @@ const fillSegs = (e, input) => {
                 if (startEnd[0] <= i && startEnd[1] >= i) {
                     elemI.classList.add("selected");
                     elemI.classList.add("clicked");
-                    if ((startEnd[0] === i || startEnd[1] === i) && ![...disabled, ...blocked].includes(i + 1)) {
+                    if (
+                        (startEnd[0] === i || startEnd[1] === i) &&
+                        ![...disabled, ...blocked].includes(i + 1)
+                    ) {
                         elemI2.classList.remove("hidden");
                     } else {
                         elemI2.classList.add("hidden");
@@ -323,13 +378,17 @@ const fillSegs = (e, input) => {
         handlesBg.querySelector("#sh" + end).classList.add("clicked");
         handlesBg.querySelector("#sh" + startEnd[0]).classList.remove("hidden");
         handlesBg.querySelector("#sh" + startEnd[1]).classList.remove("hidden");
-        oldDur = spiral.querySelector("#durIn").value = `${Math.floor((startEnd[1] - startEnd[0] + 1) / 4)}:${
-            (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60 ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60 : "00"
-        }`.format();
-        spiral.querySelector("#startIn").value = `${Math.floor(startEnd[0] / 4)}:${
+        // oldDur = spiral.querySelector("#durIn").value = `${Math.floor(
+        //     (startEnd[1] - startEnd[0] + 1) / 4
+        // )}:${
+        //     (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+        //         ? (((startEnd[1] - startEnd[0] + 1) / 4) % 1) * 60
+        //         : "00"
+        // }`.format();
+        spiral.querySelector("#startAmIn").value = `${Math.floor(startEnd[0] / 4)}:${
             ((startEnd[0] / 4) % 1) * 60 ? ((startEnd[0] / 4) % 1) * 60 : "00"
         }`.format();
-        spiral.querySelector("#endIn").value = `${Math.floor((startEnd[1] + 1) / 4)}:${
+        spiral.querySelector("#endAmIn").value = `${Math.floor((startEnd[1] + 1) / 4)}:${
             (((startEnd[1] + 1) / 4) % 1) * 60 ? (((startEnd[1] + 1) / 4) % 1) * 60 : "00"
         }`.format();
         for (let i = 0; i < 96; i++) {
@@ -338,7 +397,10 @@ const fillSegs = (e, input) => {
             if (startEnd[0] <= i && startEnd[1] >= i) {
                 elemI.classList.add("selected");
                 elemI.classList.add("clicked");
-                if ((startEnd[0] === i || startEnd[1] === i) && ![...disabled, ...blocked].includes(i + 1)) {
+                if (
+                    (startEnd[0] === i || startEnd[1] === i) &&
+                    ![...disabled, ...blocked].includes(i + 1)
+                ) {
                     elemI2.classList.remove("hidden");
                 } else {
                     elemI2.classList.add("hidden");
@@ -354,7 +416,9 @@ const fillSegs = (e, input) => {
         segmentsBg.querySelector("#sb" + end).classList.add("clicked");
     }
     spiral.querySelectorAll(".time").forEach((e) => {
-        const val = Math.floor((Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4);
+        const val = Math.floor(
+            (Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4
+        );
         if (disabled.includes(val + 1)) {
             e.setCustomValidity("disabled");
         } else if (blocked.includes(val + 1)) {
@@ -363,8 +427,8 @@ const fillSegs = (e, input) => {
             e.setCustomValidity("");
         }
     });
-    const dur = spiral.querySelector("#durIn");
-    dur.setCustomValidity(dur.value === "00:00" ? "empty" : "");
+    // const dur = spiral.querySelector("#durIn");
+    // dur.setCustomValidity(dur.value === "00:00" ? "empty" : "");
 };
 
 const fillClickedSegs = () => {
@@ -386,10 +450,14 @@ const fillClickedSegs = () => {
 spiral.querySelectorAll(".inputs .time").forEach((e) => {
     e.oninput = (e) => {
         const val =
-            Math.floor((Number(e.target.value.split(":")[0]) + Number(e.target.value.split(":")[1]) / 60) * 4) -
-            (e.target.name === "end" ? 1 : 0);
+            Math.floor(
+                (Number(e.target.value.split(":")[0]) + Number(e.target.value.split(":")[1]) / 60) *
+                    4
+            ) - (e.target.name === "end" ? 1 : 0);
         spiral.querySelectorAll(".time").forEach((e) => {
-            const val = Math.floor((Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4);
+            const val = Math.floor(
+                (Number(e.value.split(":")[0]) + Number(e.value.split(":")[1]) / 60) * 4
+            );
             if (disabled.includes(val + 1)) {
                 e.setCustomValidity("disabled");
             } else if (blocked.includes(val + 1)) {
@@ -413,9 +481,9 @@ spiral.querySelectorAll(".inputs .time").forEach((e) => {
     };
 });
 
-spiral.querySelector("#durIn").oninput = (e) => {
-    e.target.value = oldDur;
-};
+// spiral.querySelector("#durIn").oninput = (e) => {
+//     e.target.value = oldDur;
+// };
 
 String.prototype.format = function () {
     return this.includes("-") ? "00:00" : (this.length === 4 ? "0" : "") + String(this);

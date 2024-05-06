@@ -1,0 +1,191 @@
+:root {
+    --primary-color: #90bdb5ff;
+    --primary-light-color: #bdd4d0ff;
+    --primary-dark-color: #90bdb5ff;
+    --secondary-color: #cc98c7ff;
+    --disabled-color: #909abdff;
+    --dark-color: #3d4b48ff;
+    --light-color: #e5e7f6;
+
+    --shadow-light: 0 0 5px 5px var(--light-color);
+    --shadow-dark: 0 0 5px 5px var(--dark-color);
+
+    --size: 480px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    img {
+        height: 80px;
+        aspect-ratio: 1/1;
+    }
+}
+
+.component-holder {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#spiralTime {
+    position: relative;
+    width: var(--size);
+    height: calc(20px + var(--size));
+    font-family: Inter, sans-serif;
+    background-color: var(--light-color);
+
+    > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+#fragsBg {
+    background-color: var(--light-color);
+    border-radius: 5px;
+}
+
+/* ------------- */
+#spiralTime #segmentsFg {
+    z-index: 101;
+}
+#spiralTime #numbs {
+    z-index: 95;
+}
+#circlesFg {
+    z-index: 90;
+
+    > svg {
+        position: absolute;
+    }
+}
+
+#spiralTime .circles,
+#spiralTime .numbers,
+#spiralTime .handles,
+#spiralTime .segmentsSelected,
+#spiralTime .segments {
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--size);
+    height: calc(20px + var(--size));
+}
+
+.hidden {
+    display: none;
+}
+
+/* svg styles */
+#fragsSelBg:has(> .clicked) {
+    filter: drop-shadow(0 0 5px var(--dark-color)) !important;
+}
+#segmentsBg#segmentsBg .seg.disabled {
+    fill: var(--disabled-color) !important;
+    stroke: var(--disabled-color) !important;
+}
+#segmentsBg#segmentsBg .seg.reserved {
+    fill: var(--secondary-color) !important;
+    /* fill: url(#gradient) !important; */
+    stroke: var(--secondary-color) !important;
+}
+#segmentsBg .seg {
+    fill: var(--light-color) !important;
+    stroke: var(--light-color) !important;
+}
+#fragsSelBg .seg.selected,
+#segmentsBg .seg.selected {
+    fill: var(--primary-color) !important;
+    stroke: var(--primary-color) !important;
+}
+#fragsSelBg .selected.hover:not(.clicked),
+#segmentsBg .selected.hover:not(.clicked) {
+    fill: var(--primary-light-color) !important;
+    stroke: var(--primary-light-color) !important;
+}
+#fragsSelBg .selected.clicked.active.first,
+#fragsSelBg .selected.clicked.active.last ,
+#segmentsBg .selected.clicked.active.first,
+#segmentsBg .selected.clicked.active.last {
+    fill: url(#radial) !important;
+}
+.hand {
+    fill: var(--dark-color);
+    filter: url(#shadow);
+}
+.hand.clicked {
+    filter: url(#shadow-click);
+}
+
+/* ----- */
+.inputs {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    label {
+        display: inline-flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.3rem;
+        font-size: 1rem;
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+
+    input {
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid var(--dark-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        font-family: Inter, sans-serif;
+        z-index: 200;
+        background: var(--light-color);
+
+        &:user-invalid,
+        &:invalid {
+            color: red;
+        }
+    }
+}
+#startAm {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+#endAm {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#startPm {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+#endPm {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
